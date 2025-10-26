@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos - Edificio Akí San Miguel | Tu Futuro Comienza Hoy</title>
+    <meta name="description" content="Descubre los videos de Edificio Akí San Miguel. Conoce más sobre nuestro proyecto a través de nuestros videos en Facebook.">
+    <meta name="keywords" content="Edificio Akí, San Miguel, videos, Facebook, departamentos, inversión inmobiliaria, preventa">
+    <meta name="author" content="Proyectos Akí">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #050a08; /* Verde oscuro elegante casi negro */
+            --secondary-color: #d4af37; /* Dorado cálido */
+            --accent-color: #a67c00; /* Dorado más oscuro para acentos */
+            --light-color: #f5f5f5; /* Blanco roto */
+            --dark-color: #050a08;
+            --aki-green: #050a08; /* Verde principal más oscuro */
+            --aki-gold: #d4af37; /* Dorado principal */
+            --aki-green-light: #0d1610; /* Verde más claro para acentos */
+            --aki-green-bg: #0a0f0b; /* Verde para fondos */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--light-color);
+            line-height: 1.6;
+            background-color: var(--aki-green);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        
+        .navbar {
+            background-color: rgba(5, 10, 8, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--aki-gold) !important;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .logo-img {
+            height: 70px;
+            margin-right: 10px;
+            border-radius: 8px;
+            border: 2px solid var(--aki-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.7);
+        }
+        
+        .nav-link {
+            color: var(--light-color) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s;
+            position: relative;
+            letter-spacing: 0.5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--aki-gold);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: var(--aki-gold) !important;
+        }
+        
+        .nav-link.active {
+            color: var(--aki-gold) !important;
+        }
+        
+        .nav-link.active:after {
+            width: 100%;
+        }
+        
+        /* Hero Section para Videos */
+        .hero-section {
+            position: relative;
+            height: 60vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(5, 10, 8, 0.95), rgba(5, 10, 8, 0.85)), url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--light-color);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--aki-gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--light-color);
+            margin-bottom: 30px;
+            font-weight: 300;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .btn-primary {
+            background-color: var(--aki-gold);
+            color: var(--aki-green);
+            border: none;
+            padding: 15px 40px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+        
+        .btn-primary:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+            z-index: -1;
+        }
+        
+        .btn-primary:hover:before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent-color);
+            color: var(--light-color);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+        }
+        
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--aki-gold);
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background-color: var(--aki-gold);
+        }
+        
+        .section-padding {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-padding:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%23d4af37" stroke-width="0.5" stroke-opacity="0.1"/></svg>');
+            background-size: 20px 20px;
+            z-index: -1;
+        }
+        
+        /* Estilos para la sección de videos */
+        .video-section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .facebook-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .video-card {
+            background: linear-gradient(145deg, rgba(5, 10, 8, 0.9), rgba(5, 10, 8, 0.7));
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: all 0.5s;
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: var(--aki-gold);
+        }
+        
+        .video-card iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+        
+        .video-info {
+            background: linear-gradient(145deg, rgba(5, 10, 8, 0.9), rgba(5, 10, 8, 0.7));
+            padding: 20px;
+        }
+        
+        .video-info h4 {
+            color: var(--aki-gold);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .video-info p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+        
+        .featured-video {
+            background: linear-gradient(145deg, rgba(5, 10, 8, 0.9), rgba(5, 10, 8, 0.7));
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            margin-bottom: 60px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .featured-video iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: var(--aki-gold);
+            color: var(--aki-green);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+        
+        .facebook-info {
+            background: linear-gradient(145deg, rgba(5, 10, 8, 0.9), rgba(5, 10, 8, 0.7));
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: center;
+        }
+        
+        .facebook-info h3 {
+            color: var(--aki-gold);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .facebook-info p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .facebook-link {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--aki-gold);
+            color: var(--aki-green);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            margin: 0 10px;
+        }
+        
+        .facebook-link:hover {
+            background-color: var(--accent-color);
+            color: var(--light-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+            text-decoration: none;
+            color: var(--light-color);
+        }
+        
+        .facebook-link i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--aki-green), var(--aki-green-light));
+            color: var(--light-color);
+            padding: 70px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%23d4af37" stroke-width="0.5" stroke-opacity="0.1"/></svg>');
+            background-size: 20px 20px;
+            z-index: 0;
+        }
+        
+        .footer-logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: var(--light-color);
+            display: flex;
+            align-items: center;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .footer-logo .logo-img {
+            height: 70px;
+            margin-right: 10px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .footer-links a:hover {
+            color: var(--aki-gold);
+            padding-left: 5px;
+        }
+        
+        .social-icons a {
+            color: var(--light-color);
+            font-size: 1.8rem;
+            margin-right: 20px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .social-icons a:hover {
+            color: var(--aki-gold);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+            margin-top: 40px;
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+        
+        .whatsapp-float i {
+            margin-top: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .facebook-container {
+                gap: 20px;
+            }
+            
+            .video-card {
+                max-width: 100%;
+            }
+            
+            .video-card iframe {
+                height: 400px;
+            }
+            
+            .featured-video iframe {
+                height: 450px;
+            }
+            
+            .logo-img {
+                height: 50px;
+            }
+            
+            .footer-logo .logo-img {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" role="navigation" aria-label="Menú principal">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="https://z-cdn-media.chatglm.cn/files/aab548ee-032c-40fc-ba4d-80070c973132_logo.png?auth_key=1789335585-7f63306adb0e47ac863d27f034d8e75b-0-f93f5c0d88186949b24959f2cbd5f269" alt="Logo de Proyectos AKÍ" class="logo-img">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#nosotros">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#edificio-aki">Edificio AKI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#departamentos">Departamentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#ubicacion">Ubicación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#inversion">Inversión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Videos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section para Videos -->
+    <section class="hero-section" role="banner" aria-label="Sección de videos">
+        <div class="hero-content">
+            <h1 class="hero-title" data-aos="fade-up">Videos del Proyecto</h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">Conoce más sobre Edificio Akí San Miguel</p>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <a href="#facebook-videos" class="btn btn-primary">Ver Videos</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección de Videos Facebook -->
+    <section id="facebook-videos" class="video-section" role="region" aria-labelledby="videos-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="section-title" id="videos-title" data-aos="fade-up">Nuestros Videos en Facebook</h2>
+                    <p class="lead" data-aos="fade-up" data-aos-delay="100" style="color: var(--aki-gold); font-size: 1.3rem; font-weight: 500;">Síguenos en Facebook para contenido exclusivo</p>
+                </div>
+            </div>
+            
+            <!-- Información de Facebook -->
+            <div class="facebook-info" data-aos="fade-up">
+                <h3>¡Síguenos en Facebook!</h3>
+                <p>Descubre todo sobre Edificio Akí San Miguel a través de nuestros videos en Facebook. Recorridos virtuales, detalles de las tipologías de departamentos, información sobre la ubicación estratégica y mucho más contenido exclusivo que te ayudará a tomar la mejor decisión de inversión.</p>
+                <div>
+                    <a href="https://www.facebook.com/proyectosaki" target="_blank" rel="noopener noreferrer" class="facebook-link">
+                        <i class="fab fa-facebook-f"></i> Visitar nuestra página
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Video Destacado - Tour Virtual -->
+            <div class="featured-video" data-aos="fade-up">
+                <span class="featured-badge">Video Destacado</span>
+                <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F61580465416126%2Fvideos%2F795243703260049%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                <div class="video-info">
+                    <h4>Tour Virtual Completo</h4>
+                    <p>Recorre cada espacio de Edificio Akí San Miguel desde la comodidad de tu hogar. Conoce los acabados, distribuciones y detalles que hacen de nuestro proyecto una inversión inteligente y un lugar ideal para vivir.</p>
+                </div>
+            </div>
+            
+            <!-- Videos de Facebook -->
+            <div class="facebook-container" data-aos="fade-up">
+                <!-- Video 2: Proceso de Construcción -->
+                <div class="video-card" data-aos="fade-up" data-aos-delay="100">
+                    <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F4174013982927575%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                    <div class="video-info">
+                        <h4>Avances de la Construcción</h4>
+                        <p>Acompaña el proceso de construcción de Edificio Akí San Miguel. Observa la calidad de nuestros materiales, el avance de las obras y los estándares de seguridad que garantizan un proyecto sólido y confiable.</p>
+                    </div>
+                </div>
+                
+                <!-- Video 3: Ubicación y Entorno -->
+                <div class="video-card" data-aos="fade-up" data-aos-delay="200">
+                    <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1543889750384123%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                    <div class="video-info">
+                        <h4>Ubicación Privilegiada</h4>
+                        <p>Descubre por qué San Miguel es la ubicación perfecta para tu nueva inversión. A pasos de Open Plaza La Marina, centros educativos de primer nivel, áreas verdes y con excelente conectividad con toda la ciudad.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección de llamada a la acción -->
+            <div class="row mt-5">
+                <div class="col-lg-12 text-center" data-aos="fade-up">
+                    <div class="facebook-info">
+                        <h3>¿Interesado en Edificio Akí?</h3>
+                        <p>No te quedes con las dudas. Nuestros asesores están listos para brindarte toda la información que necesitas sobre departamentos, financiamiento y disponibilidad.</p>
+                        <div>
+                            <a href="https://wa.me/51915214505?text=Hola%2C%20estoy%20interesado%20en%20Edificio%20Ak%C3%AD%20San%20Miguel" target="_blank" rel="noopener noreferrer" class="facebook-link">
+                                <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+                            </a>
+                            <a href="tel:+51915214505" class="facebook-link">
+                                <i class="fas fa-phone"></i> Llamar ahora
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4" data-aos="fade-up">
+                    <div class="footer-logo">
+                        <img src="https://z-cdn-media.chatglm.cn/files/aab548ee-032c-40fc-ba4d-80070c973132_logo.png?auth_key=1789335585-7f63306adb0e47ac863d27f034d8e75b-0-f93f5c0d88186949b24959f2cbd5f269" alt="Logo de Proyectos AKÍ" class="logo-img">
+                    </div>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; line-height: 1.8;">Desarrollamos espacios que transforman vidas y crean comunidades. Experiencia creando proyectos inmobiliarios de calidad.</p>
+                    <div class="social-icons mt-4">
+                        <a href="https://www.facebook.com/proyectosaki" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Proyectos Akí"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/proyectosaki" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Proyectos Akí"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@proyectos.aki" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Proyectos Akí"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <h5 class="text-white mb-4" style="font-size: 1.3rem; font-weight: 700; letter-spacing: 1px;">Enlaces Rápidos</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="index.html#nosotros">Nosotros</a></li>
+                        <li><a href="index.html#edificio-aki">Edificio AKI</a></li>
+                        <li><a href="index.html#departamentos">Departamentos</a></li>
+                        <li><a href="index.html#ubicacion">Ubicación</a></li>
+                        <li><a href="index.html#inversion">Inversión</a></li>
+                        <li><a href="#">Videos</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <h5 class="text-white mb-4" style="font-size: 1.3rem; font-weight: 700; letter-spacing: 1px;">Contacto</h5>
+                    <p style="color: var(--aki-gold); font-size: 1rem; margin-bottom: 10px;">
+                        <i class="fas fa-phone-alt" style="margin-right: 10px;"></i> 
+                        <a href="tel:+51915214505" style="color: var(--aki-gold); text-decoration: none;">915214505</a>
+                    </p>
+                    <p style="color: var(--aki-gold); font-size: 1rem; margin-bottom: 10px;">
+                        <i class="fas fa-envelope" style="margin-right: 10px;"></i> 
+                        <a href="mailto:proyectosaki@gmail.com" style="color: var(--aki-gold); text-decoration: none;">proyectosaki@gmail.com</a>
+                    </p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Proyectos Akí. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Botón de WhatsApp flotante -->
+    <a href="https://wa.me/51915214505?text=Hola%2C%20estoy%20interesado%20en%20Edificio%20Ak%C3%AD%20San%20Miguel" 
+       class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Inicializar AOS (Animate On Scroll)
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+        
+        // Smooth scrolling para los enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Cambiar el color del navbar al hacer scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(5, 10, 8, 0.95)';
+            } else {
+                navbar.style.backgroundColor = 'rgba(5, 10, 8, 0.9)';
+            }
+        });
+    </script>
+</body>
+</html>
