@@ -183,16 +183,19 @@
             font-family: 'Playfair Display', serif;
         }
         
-        .policy-subtitle {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--light-color);
-            margin-bottom: 25px;
-            font-family: 'Playfair Display', serif;
+        .policy-content {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
         }
         
         .policy-section {
             margin-bottom: 40px;
+            padding: 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border-left: 4px solid var(--aki-gold);
         }
         
         .policy-section-title {
@@ -201,35 +204,28 @@
             color: var(--aki-gold);
             margin-bottom: 20px;
             font-family: 'Playfair Display', serif;
-        }
-        
-        .policy-content {
-            color: rgba(255,255,255,0.9);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-        
-        .policy-list {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 20px;
-        }
-        
-        .policy-list li {
-            margin-bottom: 15px;
             display: flex;
-            align-items: flex-start;
-            color: rgba(255,255,255,0.9);
-            font-size: 1.1rem;
-            line-height: 1.6;
+            align-items: center;
         }
         
-        .policy-list li i {
+        .policy-section-title i {
+            margin-right: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+        }
+        
+        .contact-info i {
             color: var(--aki-gold);
             margin-right: 15px;
-            margin-top: 5px;
             font-size: 1.2rem;
+            width: 25px;
         }
         
         .policy-highlight {
@@ -348,12 +344,21 @@
             padding-left: 5px;
         }
         
+        .social-icons {
+            margin-top: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
         .social-icons a {
             color: var(--light-color);
             font-size: 1.8rem;
             margin-right: 20px;
             transition: all 0.3s;
             display: inline-block;
+            text-decoration: none;
+            position: relative;
+            z-index: 10;
         }
         
         .social-icons a:hover {
@@ -387,19 +392,11 @@
                 font-size: 2rem;
             }
             
-            .policy-subtitle {
-                font-size: 1.5rem;
-            }
-            
             .policy-section-title {
                 font-size: 1.3rem;
             }
             
             .policy-content {
-                font-size: 1rem;
-            }
-            
-            .policy-list li {
                 font-size: 1rem;
             }
             
@@ -464,125 +461,67 @@
         <div class="container">
             <div class="policy-container">
                 <h2 class="policy-title">Política de Privacidad</h2>
-                <p class="policy-content">En Proyectos AKI S.A.C., nos comprometemos a proteger la privacidad y seguridad de tus datos personales. Esta Política de Privacidad establece cómo recopilamos, utilizamos, almacenamos y protegemos tu información de acuerdo con la Ley N° 29733, Ley de Protección de Datos Personales, y su Reglamento aprobado por el Decreto Supremo N° 003-2013-JUS.</p>
                 
-                <div class="policy-highlight">
-                    <p><strong>Fecha de entrada en vigencia:</strong> 1 de enero de 2025<br>
-                    <strong>Última actualización:</strong> 1 de enero de 2025</p>
-                </div>
+                <p class="policy-content">En Proyectos AKI S.A.C. respetamos tu privacidad y protegemos tus datos personales conforme a la Ley N.° 29733, Ley de Protección de Datos Personales.</p>
                 
                 <div class="policy-section">
-                    <h3 class="policy-section-title">1. Identidad del Responsable de la Base de Datos Personales</h3>
-                    <p class="policy-content">De conformidad con lo establecido en la Ley de Protección de Datos Personales, informamos que:</p>
-                    <ul class="policy-list">
-                        <li><i class="fas fa-building"></i> <strong>Responsable:</strong> PROYECTOS AKI S.A.C.</li>
-                        <li><i class="fas fa-map-marker-alt"></i> <strong>Domicilio:</strong> Av. La Marina 1234, San Miguel, Lima, Perú</li>
-                        <li><i class="fas fa-envelope"></i> <strong>Correo electrónico:</strong> proyectosaki@gmail.com</li>
-                        <li><i class="fas fa-phone-alt"></i> <strong>Teléfono:</strong> +51 915 214 505</li>
-                    </ul>
-                </div>
-                
-                <div class="policy-section">
-                    <h3 class="policy-section-title">2. Datos Personales que Recopilamos</h3>
-                    <p class="policy-content">Recopilamos los siguientes datos personales de manera directa y con tu consentimiento:</p>
-                    <ul class="policy-list">
-                        <li><i class="fas fa-id-card"></i> <strong>Datos de identificación:</strong> Nombres y apellidos, documento de identidad (DNI, RUC, CE), fecha de nacimiento, nacionalidad.</li>
-                        <li><i class="fas fa-phone-alt"></i> <strong>Datos de contacto:</strong> Dirección postal, número de teléfono, correo electrónico.</li>
-                        <li><i class="fas fa-briefcase"></i> <strong>Datos profesionales y económicos:</strong> Ocupación, ingresos, información crediticia (cuando sea necesario para evaluar solicitudes de financiamiento).</li>
-                        <li><i class="fas fa-home"></i> <strong>Datos relacionados con inmuebles:</strong> Preferencias de vivienda, capacidad de pago, información sobre propiedades de tu interés.</li>
-                        <li><i class="fas fa-laptop"></i> <strong>Datos de navegación:</strong> Dirección IP, tipo de navegador, sistema operativo, páginas visitadas, tiempo de navegación, cuando interactúas con nuestro sitio web.</li>
-                    </ul>
-                </div>
-                
-                <div class="policy-section">
-                    <h3 class="policy-section-title">3. Finalidad del Tratamiento de Datos Personales</h3>
-                    <p class="policy-content">Tus datos personales serán tratados para las siguientes finalidades, de acuerdo con el principio de finalidad establecido en el artículo IV del Título Preliminar de la Ley N° 29733:</p>
-                    <ul class="policy-list">
-                        <li><i class="fas fa-handshake"></i> <strong>Gestión de la relación comercial:</strong> Para atender tus consultas, solicitudes de información sobre nuestros proyectos, gestión de preventas y ventas.</li>
-                        <li><i class="fas fa-file-contract"></i> <strong>Ejecución de contratos:</strong> Para formalizar acuerdos de compraventa, promesas de compraventa y otros contratos relacionados con nuestros servicios inmobiliarios.</li>
-                        <li><i class="fas fa-bullhorn"></i> <strong>Envío de comunicaciones comerciales:</strong> Para informarte sobre nuevos proyectos, promociones, eventos y servicios relacionados con el sector inmobiliario, siempre que hayas consentido expresamente recibir dicha información.</li>
-                        <li><i class="fas fa-chart-line"></i> <strong>Evaluación de solvencia:</strong> Para verificar tu capacidad económica y crediticia cuando solicites financiamiento o opciones de pago.</li>
-                        <li><i class="fas fa-cogs"></i> <strong>Mejora de nuestros servicios:</strong> Para analizar tus preferencias y mejorar la calidad de nuestros proyectos y atención al cliente.</li>
-                        <li><i class="fas fa-shield-alt"></i> <strong>Cumplimiento de obligaciones legales:</strong> Para cumplir con las disposiciones establecidas por las autoridades competentes, incluyendo las relacionadas con la prevención del lavado de activos y financiamiento del terrorismo.</li>
-                    </ul>
-                </div>
-                
-                <div class="policy-section">
-                    <h3 class="policy-section-title">4. Base Legal para el Tratamiento de Datos</h3>
-                    <p class="policy-content">El tratamiento de tus datos personales se realiza sobre las siguientes bases legales, conforme a lo establecido en el artículo 13 de la Ley N° 29733:</p>
-                    <ul class="policy-list">
-                        <li><i class="fas fa-file-signature"></i> <strong>Consentimiento del titular:</strong> Cuando nos autorizas expresamente a tratar tus datos para una o varias finalidades específicas.</li>
-                        <li><i class="fas fa-file-contract"></i> <strong>Contrato:</strong> Cuando el tratamiento es necesario para la ejecución de un contrato en el que eres parte o para la aplicación de medidas precontractuales solicitadas por ti.</li>
-                        <li><i class="fas fa-balance-scale"></i> <strong>Obligación legal:</strong> Cuando el tratamiento es necesario para cumplir con una obligación legal aplicable al Responsable.</li>
-                        <li><i class="fas fa-chart-pie"></i> <strong>Interés legítimo:</strong> Cuando el tratamiento es necesario para la satisfacción de intereses legítimos perseguidos por el Responsable, siempre que sobre dichos intereses no prevalezcan los derechos y libertades fundamentales del titular.</li>
-                    </ul>
-                </div>
-                
-                <div class="policy-section">
-                    <h3 class="policy-section-title">5. Derechos del Titular de Datos Personales</h3>
-                    <p class="policy-content">De acuerdo con el Capítulo II de la Ley N° 29733, como titular de datos personales, tienes los siguientes derechos:</p>
-                    <ul class="policy-list">
-                        <li><i class="fas fa-info-circle"></i> <strong>Derecho de información:</strong> A conocer qué datos personales estamos tratando y las características del tratamiento.</li>
-                        <li><i class="fas fa-search"></i> <strong>Derecho de acceso:</strong> A solicitar y obtener información sobre tus datos personales objeto de tratamiento.</li>
-                        <li><i class="fas fa-edit"></i> <strong>Derecho de rectificación:</strong> A solicitar la corrección de datos personales inexactos o incompletos.</li>
-                        <li><i class="fas fa-times-circle"></i> <strong>Derecho de cancelación:</strong> A solicitar la eliminación de tus datos personales cuando consideres que no están siendo tratados conforme a los principios, deberes y obligaciones previstos en la Ley.</li>
-                        <li><i class="fas fa-ban"></i> <strong>Derecho de oposición:</strong> A oponerte al tratamiento de tus datos personales cuando no exista una obligación legal que lo justifique.</li>
-                        <li><i class="fas fa-file-export"></i> <strong>Derecho de portabilidad:</strong> A solicitar la transferencia de tus datos personales a otro responsable, en la medida de lo técnicamente posible.</li>
-                    </ul>
-                    
-                    <div class="policy-highlight">
-                        <p>Para ejercer cualquiera de estos derechos, puedes presentar una solicitud escrita a nuestro domicilio o enviar un correo electrónico a proyectosaki@gmail.com, adjuntando una copia de tu documento de identidad. La solicitud deberá contener como mínimo: nombre completo del titular, documento de identidad, petición concreta, domicilio y número telefónico.</p>
+                    <h3 class="policy-section-title"><i class="fas fa-user-tie"></i>Responsable del tratamiento:</h3>
+                    <div class="contact-info">
+                        <i class="fas fa-building"></i>
+                        <span>Proyectos AKI S.A.C.</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <span>proyectosaki@gmail.com</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+51 915 214 505</span>
                     </div>
                 </div>
                 
                 <div class="policy-section">
-                    <h3 class="policy-section-title">6. Medidas de Seguridad</h3>
-                    <p class="policy-content">Proyectos AKI S.A.C. ha implementado medidas de seguridad técnicas, organizativas y legales adecuadas para garantizar la seguridad de tus datos personales y evitar su alteración, pérdida, tratamiento o acceso no autorizado, de conformidad con lo establecido en el artículo 18 de la Ley N° 29733 y el artículo 16 de su Reglamento.</p>
-                    <p class="policy-content">Entre las medidas implementadas se incluyen:</p>
-                    <ul class="policy-list">
-                        <li><i class="fas fa-lock"></i> <strong>Protección física:</strong> Control de acceso a nuestras instalaciones y sistemas.</li>
-                        <li><i class="fas fa-user-shield"></i> <strong>Control de acceso lógico:</strong> Autenticación de usuarios, contraseñas seguras y gestión de permisos.</li>
-                        <li><i class="fas fa-database"></i> <strong>Respaldo y recuperación de información:</strong> Procedimientos para garantizar la integridad y disponibilidad de los datos.</li>
-                        <li><i class="fas fa-user-secret"></i> <strong>Confidencialidad:</strong> Acuerdos de confidencialidad con nuestro personal y proveedores.</li>
-                        <li><i class="fas fa-chalkboard-teacher"></i> <strong>Capacitación:</strong> Formación continua a nuestro personal sobre protección de datos personales.</li>
-                    </ul>
+                    <h3 class="policy-section-title"><i class="fas fa-database"></i>Datos que podemos recopilar:</h3>
+                    <p class="policy-content">Nombres, teléfono, correo electrónico y la información que nos brindes para atender tus consultas o informarte sobre nuestros proyectos inmobiliarios.</p>
                 </div>
                 
                 <div class="policy-section">
-                    <h3 class="policy-section-title">7. Transferencia de Datos Personales</h3>
-                    <p class="policy-content">Tus datos personales no serán transferidos a terceros, salvo en los siguientes casos previstos en el artículo 14 de la Ley N° 29733:</p>
-                    <ul class="policy-list">
-                        <li><i class="fas fa-file-contract"></i> Cuando la transferencia esté prevista en una ley.</li>
-                        <li><i class="fas fa-file-signature"></i> Cuando el titular haya otorgado su consentimiento expreso e inequívoco.</li>
-                        <li><i class="fas fa-handshake"></i> Cuando sea necesario para la ejecución de un contrato entre el titular y el Responsable, o para medidas precontractuales.</li>
-                        <li><i class="fas fa-balance-scale"></i> Cuando sea necesario para el mantenimiento o cumplimiento de una relación jurídica con el titular.</li>
-                        <li><i class="fas fa-gavel"></i> Cuando la transferencia sea requerida por una autoridad competente en el marco de una investigación penal, civil o administrativa.</li>
-                    </ul>
-                    
-                    <p class="policy-content">En caso de que sea necesaria una transferencia internacional de datos personales, esta se realizará únicamente a países que ofrezcan un nivel de protección adecuado o bajo las excepciones previstas en la legislación vigente.</p>
+                    <h3 class="policy-section-title"><i class="fas fa-bullseye"></i>Finalidad:</h3>
+                    <p class="policy-content">Responder tus consultas, gestionar preventas/ventas y, solo si lo autorizas, enviarte información sobre nuestros proyectos y servicios.</p>
                 </div>
                 
                 <div class="policy-section">
-                    <h3 class="policy-section-title">8. Cambios a la Política de Privacidad</h3>
-                    <p class="policy-content">Proyectos AKI S.A.C. se reserva el derecho de modificar esta Política de Privacidad en cualquier momento. Cualquier cambio será publicado en nuestro sitio web con una nueva fecha de "Última actualización". Te recomendamos revisar periódicamente esta política para estar informado sobre cómo protegemos tus datos personales.</p>
+                    <h3 class="policy-section-title"><i class="fas fa-share-alt"></i>Compartición:</h3>
+                    <p class="policy-content">No compartimos tu información con terceros, salvo obligación legal.</p>
                 </div>
                 
                 <div class="policy-section">
-                    <h3 class="policy-section-title">9. Aceptación</h3>
-                    <p class="policy-content">El uso de nuestro sitio web y la contratación de nuestros servicios implica la aceptación de esta Política de Privacidad. Si no estás de acuerdo con las prácticas descritas en esta política, te solicitamos no nos proporciones tus datos personales ni utilices nuestros servicios.</p>
+                    <h3 class="policy-section-title"><i class="fas fa-user-shield"></i>Tus derechos:</h3>
+                    <p class="policy-content">Puedes acceder, rectificar o solicitar la eliminación de tus datos en cualquier momento escribiéndonos a:</p>
+                    <div class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <span>proyectosaki@gmail.com</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+51 915 214 505 (WhatsApp)</span>
+                    </div>
                 </div>
                 
                 <div class="policy-section">
-                    <h3 class="policy-section-title">10. Contacto</h3>
-                    <p class="policy-content">Si tienes alguna pregunta, comentario o inquietud sobre esta Política de Privacidad o sobre el tratamiento de tus datos personales, puedes contactarnos a través de:</p>
-                    <ul class="policy-list">
-                        <li><i class="fas fa-envelope"></i> <strong>Correo electrónico:</strong> proyectosaki@gmail.com</li>
-                        <li><i class="fas fa-phone-alt"></i> <strong>Teléfono:</strong> +51 915 214 505</li>
-                        <li><i class="fas fa-map-marker-alt"></i> <strong>Domicilio:</strong> Av. La Marina 1234, San Miguel, Lima, Perú</li>
-                    </ul>
+                    <h3 class="policy-section-title"><i class="fas fa-lock"></i>Seguridad:</h3>
+                    <p class="policy-content">Aplicamos medidas razonables para proteger tus datos frente a accesos no autorizados.</p>
                 </div>
                 
-                <p class="last-updated">Última actualización: 1 de enero de 2025</p>
+                <div class="policy-section">
+                    <h3 class="policy-section-title"><i class="fas fa-sync-alt"></i>Actualizaciones:</h3>
+                    <p class="policy-content">Esta política puede modificarse y cualquier cambio será publicado en nuestra web.</p>
+                </div>
+                
+                <div class="policy-highlight">
+                    <p><strong>Fecha de entrada en vigencia:</strong> 11/08/2025<br>
+                    <strong>Última actualización:</strong> 29/10/2025</p>
+                </div>
             </div>
         </div>
     </section>
@@ -596,10 +535,16 @@
                         <img src="https://z-cdn-media.chatglm.cn/files/aab548ee-032c-40fc-ba4d-80070c973132_logo.png?auth_key=1789335585-7f63306adb0e47ac863d27f034d8e75b-0-f93f5c0d88186949b24959f2cbd5f269" alt="Logo de Proyectos AKÍ" class="logo-img">
                     </div>
                     <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; line-height: 1.8;">Desarrollamos espacios que transforman vidas y crean comunidades. Experiencia creando proyectos inmobiliarios de calidad.</p>
-                    <div class="social-icons mt-4">
-                        <a href="https://www.facebook.com/proyectosaki" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Proyectos Akí"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/proyectosaki" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Proyectos Akí"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.tiktok.com/@proyectos.aki" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Proyectos Akí"><i class="fab fa-tiktok"></i></a>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=61580465416126" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Proyectos Akí" style="z-index: 1000; position: relative;">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/proyectosaki_25?igsh=MWh0ajlvdzZmc3VnZw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Proyectos Akí" style="z-index: 1000; position: relative;">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@proyectosaki?_t=ZS-90x9rvPSa8t&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Proyectos Akí" style="z-index: 1000; position: relative;">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-4">
@@ -619,8 +564,6 @@
                     <ul class="footer-links">
                         <li><a href="privacidad.html">Política de Privacidad</a></li>
                         <li><a href="terminos.html">Términos y Condiciones</a></li>
-                        <li><a href="cookies.html">Política de Cookies</a></li>
-                        <li><a href="atencion.html">Atención al Cliente</a></li>
                         <li><a href="transparencia.html">Transparencia Comercial</a></li>
                     </ul>
                 </div>
@@ -665,6 +608,17 @@
             } else {
                 navbar.style.backgroundColor = 'rgba(5, 10, 8, 0.9)';
             }
+        });
+        
+        // Asegurar que los enlaces de redes sociales sean clickeables
+        document.addEventListener('DOMContentLoaded', function() {
+            const socialLinks = document.querySelectorAll('.social-icons a');
+            socialLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    // No prevenir el comportamiento predeterminado para que el enlace funcione
+                    console.log('Enlace de red social clickeado:', this.href);
+                });
+            });
         });
     </script>
 </body>
