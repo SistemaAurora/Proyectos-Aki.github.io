@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transparencia Comercial | Edificio Akí San Miguel</title>
-    <meta name="description" content="Transparencia Comercial de Proyectos Akí. Conoce nuestra información legal, financiera y comercial según la legislación peruana.">
-    <meta name="keywords"content="transparencia comercial, información legal, INDECOPI, Proyectos Akí">
+    <meta name="description" content="Transparencia Comercial de Proyectos Akí. Información clara sobre nuestro proyecto y empresa.">
+    <meta name="keywords" content="transparencia comercial, información inmobiliaria, Proyectos Akí, Edificio Akí">
     <meta name="author" content="Proyectos Akí">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -183,8 +183,19 @@
             font-family: 'Playfair Display', serif;
         }
         
+        .transparency-content {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
         .transparency-section {
             margin-bottom: 40px;
+            padding: 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border-left: 4px solid var(--aki-gold);
         }
         
         .transparency-section-title {
@@ -193,22 +204,63 @@
             color: var(--aki-gold);
             margin-bottom: 20px;
             font-family: 'Playfair Display', serif;
+            display: flex;
+            align-items: center;
         }
         
-        .transparency-content {
+        .transparency-section-title i {
+            margin-right: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .info-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: var(--aki-gold);
+        }
+        
+        .info-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--aki-gold);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-card-title i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .info-card-content {
             color: rgba(255,255,255,0.9);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
         }
         
-        .transparency-list {
+        .info-list {
             list-style: none;
             padding: 0;
             margin-bottom: 20px;
         }
         
-        .transparency-list li {
+        .info-list li {
             margin-bottom: 15px;
             display: flex;
             align-items: flex-start;
@@ -217,7 +269,7 @@
             line-height: 1.6;
         }
         
-        .transparency-list li i {
+        .info-list li i {
             color: var(--aki-gold);
             margin-right: 15px;
             margin-top: 5px;
@@ -239,98 +291,27 @@
             margin: 0;
         }
         
-        .document-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .document-card {
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            transition: all 0.3s ease;
+        .contact-info {
             display: flex;
             align-items: center;
+            margin-bottom: 15px;
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
         }
         
-        .document-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            border-color: var(--aki-gold);
-        }
-        
-        .document-icon {
-            font-size: 2rem;
+        .contact-info i {
             color: var(--aki-gold);
             margin-right: 15px;
+            font-size: 1.2rem;
+            width: 25px;
         }
         
-        .document-info {
-            flex: 1;
-        }
-        
-        .document-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--aki-gold);
-            margin-bottom: 5px;
-            font-family: 'Playfair Display', serif;
-        }
-        
-        .document-description {
-            color: rgba(255,255,255,0.8);
+        .last-updated {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
             font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-        
-        .document-link {
-            color: var(--aki-gold);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        
-        .document-link:hover {
-            color: var(--accent-color);
-        }
-        
-        .document-link i {
-            margin-left: 5px;
-            font-size: 0.8rem;
-        }
-        
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-            background: rgba(212, 175, 55, 0.05);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .info-table th {
-            background: rgba(212, 175, 55, 0.2);
-            color: var(--aki-gold);
-            font-weight: 600;
-            text-align: left;
-            padding: 15px;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        .info-table td {
-            padding: 15px;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-            color: rgba(255,255,255,0.9);
-        }
-        
-        .info-table tr:nth-child(even) {
-            background: rgba(212, 175, 55, 0.05);
+            margin-top: 30px;
+            font-style: italic;
         }
         
         .back-to-top {
@@ -426,12 +407,21 @@
             padding-left: 5px;
         }
         
+        .social-icons {
+            margin-top: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
         .social-icons a {
             color: var(--light-color);
             font-size: 1.8rem;
             margin-right: 20px;
             transition: all 0.3s;
             display: inline-block;
+            text-decoration: none;
+            position: relative;
+            z-index: 10;
         }
         
         .social-icons a:hover {
@@ -471,14 +461,6 @@
             
             .transparency-content {
                 font-size: 1rem;
-            }
-            
-            .transparency-list li {
-                font-size: 1rem;
-            }
-            
-            .document-grid {
-                grid-template-columns: 1fr;
             }
             
             .logo-img {
@@ -533,348 +515,190 @@
     <div class="page-header">
         <div class="container">
             <h1 class="page-title">Transparencia Comercial</h1>
-            <p class="page-subtitle">Conoce nuestra información legal, financiera y comercial según la legislación peruana vigente.</p>
+            <p class="page-subtitle">Información clara y accesible sobre nuestra empresa y proyecto</p>
         </div>
     </div>
     
-    <!-- Contenido de transparencia comercial -->
+    <!-- Contenido de transparencia -->
     <section class="section-padding">
         <div class="container">
             <div class="transparency-container">
                 <h2 class="transparency-title">Transparencia Comercial</h2>
-                <p class="transparency-content">En PROYECTOS AKI S.A.C., nos comprometemos con la transparencia en todas nuestras operaciones comerciales. De conformidad con la Ley N° 29571, Código de Protección y Defensa del Consumidor, y la Ley N° 30225, Ley de Fortalecimiento de la SUNAT, ponemos a disposición del público información relevante sobre nuestra empresa y proyectos.</p>
+                
+                <p class="transparency-content">En Proyectos AKI S.A.C., creemos en la importancia de la transparencia en nuestras relaciones comerciales. Esta sección proporciona información clara sobre nuestra empresa y el proyecto Edificio Akí San Miguel.</p>
                 
                 <div class="transparency-highlight">
-                    <p><strong>Fecha de entrada en vigencia:</strong> 1 de enero de 2025<br>
-                    <strong>Última actualización:</strong> 1 de enero de 2025</p>
+                    <p><strong>Fecha de entrada en vigencia:</strong> 11/08/2025<br>
+                    <strong>Última actualización:</strong> 29/10/2025</p>
                 </div>
                 
                 <div class="transparency-section">
-                    <h3 class="transparency-section-title">1. Información de la Empresa</h3>
-                    <p class="transparency-content">PROYECTOS AKI S.A.C. es una empresa constituida en Perú, dedicada al desarrollo de proyectos inmobiliarios de alta calidad. A continuación, presentamos información legal y comercial de nuestra empresa:</p>
-                    
-                    <table class="info-table">
-                        <tr>
-                            <th width="30%">Concepto</th>
-                            <th>Información</th>
-                        </tr>
-                        <tr>
-                            <td><strong>Razón Social</strong></td>
-                            <td>PROYECTOS AKI S.A.C.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>RUC</strong></td>
-                            <td>20612345678</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Partida Registral</strong></td>
-                            <td>N° 12345678 - Registro de Personas Jurídicas de Lima</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Domicilio Fiscal</strong></td>
-                            <td>Av. La Marina 1234, San Miguel, Lima, Perú</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Actividad Económica Principal</strong></td>
-                            <td>Desarrollo y venta de proyectos inmobiliarios (CIIU: 4100, 6820)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Representante Legal</strong></td>
-                            <td>William Watanabe Moreyra</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Fecha de Constitución</strong></td>
-                            <td>15 de marzo de 2010</td>
-                        </tr>
-                    </table>
+                    <h3 class="transparency-section-title"><i class="fas fa-building"></i>Información de la Empresa</h3>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-card-title">
+                                <i class="fas fa-certificate"></i>
+                                Razón Social
+                            </div>
+                            <div class="info-card-content">
+                                Proyectos AKI S.A.C.<br>
+                                RUC: 20612345678<br>
+                                Tipo: Sociedad Anónima Cerrada
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-card-title">
+                                <i class="fas fa-calendar-alt"></i>
+                                Constitución
+                            </div>
+                            <div class="info-card-content">
+                                Constituida el 15 de enero de 2020<br>
+                                Vigente desde esa fecha
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-card-title">
+                                <i class="fas fa-briefcase"></i>
+                                Objeto Social
+                            </div>
+                            <div class="info-card-content">
+                                Desarrollo y comercialización de proyectos inmobiliarios, construcción y venta de departamentos.
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="transparency-section">
-                    <h3 class="transparency-section-title">2. Información del Proyecto Edificio Akí San Miguel</h3>
-                    <p class="transparency-content">El Edificio Akí San Miguel es nuestro proyecto insignia, ubicado en el distrito de San Miguel, Lima. A continuación, presentamos información detallada sobre el proyecto:</p>
-                    
-                    <table class="info-table">
-                        <tr>
-                            <th width="30%">Concepto</th>
-                            <th>Información</th>
-                        </tr>
-                        <tr>
-                            <td><strong>Nombre del Proyecto</strong></td>
-                            <td>Edificio Akí San Miguel</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Ubicación</strong></td>
-                            <td>Av. La Marina 1234, San Miguel, Lima, Perú</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Partida Registral del Terreno</strong></td>
-                            <td>N° 87654321 - Registro de la Propiedad Inmueble de Lima</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Licencia de Construcción</strong></td>
-                            <td>N° LC-2024-12345 - Municipalidad de San Miguel</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Fecha de Inicio de Construcción</strong></td>
-                            <td>Agosto 2025 (prevista)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Fecha de Entrega Estimada</strong></td>
-                            <td>Julio 2026 (prevista)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Número de Departamentos</strong></td>
-                            <td>15 unidades</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Área Construida Total</strong></td>
-                            <td>2,450 m²</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Área del Terreno</strong></td>
-                            <td>500 m²</td>
-                        </tr>
-                    </table>
+                    <h3 class="transparency-section-title"><i class="fas fa-home"></i>Información del Proyecto</h3>
+                    <ul class="info-list">
+                        <li><i class="fas fa-check"></i> <strong>Nombre del proyecto:</strong> Edificio Akí San Miguel</li>
+                        <li><i class="fas fa-check"></i> <strong>Ubicación:</strong> Distrito de San Miguel, Lima, Perú</li>
+                        <li><i class="fas fa-check"></i> <strong>Total de unidades:</strong> 15 departamentos</li>
+                        <li><i class="fas fa-check"></i> <strong>Tipologías disponibles:</strong> 1, 2, 3 dormitorios y dúplex</li>
+                        <li><i class="fas fa-check"></i> <strong>Estado del proyecto:</strong> En preventa</li>
+                        <li><i class="fas fa-check"></i> <strong>Fecha estimada de inicio de construcción:</strong> Agosto 2025</li>
+                        <li><i class="fas fa-check"></i> <strong>Fecha estimada de entrega:</strong> Julio 2026</li>
+                    </ul>
                 </div>
                 
                 <div class="transparency-section">
-                    <h3 class="transparency-section-title">3. Documentos Legales y Administrativos</h3>
-                    <p class="transparency-content">Ponemos a disposición del público los documentos legales y administrativos relacionados con nuestra empresa y el proyecto Edificio Akí San Miguel, en cumplimiento de la normativa vigente:</p>
-                    
-                    <div class="document-grid">
-                        <div class="document-card">
-                            <div class="document-icon">
+                    <h3 class="transparency-section-title"><i class="fas fa-info-circle"></i>Información General</h3>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-card-title">
+                                <i class="fas fa-shield-alt"></i>
+                                Permisos y Autorizaciones
+                            </div>
+                            <div class="info-card-content">
+                                Contamos con todos los permisos municipales necesarios para el desarrollo del proyecto. Los documentos correspondientes están disponibles para consulta previa.
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-card-title">
                                 <i class="fas fa-file-contract"></i>
+                                Seguridad Jurídica
                             </div>
-                            <div class="document-info">
-                                <h4 class="document-title">Estatutos Sociales</h4>
-                                <p class="document-description">Estatutos de PROYECTOS AKI S.A.C. debidamente inscritos en Registros Públicos.</p>
-                                <a href="#" class="document-link">Descargar <i class="fas fa-download"></i></a>
-                            </div>
-                        </div>
-                        
-                        <div class="document-card">
-                            <div class="document-icon">
-                                <i class="fas fa-file-alt"></i>
-                            </div>
-                            <div class="document-info">
-                                <h4 class="document-title">Vigencia de Poder</h4>
-                                <p class="document-description">Poder del representante legal con vigencia actualizada.</p>
-                                <a href="#" class="document-link">Descargar <i class="fas fa-download"></i></a>
+                            <div class="info-card-content">
+                                Cada departamento cuenta con partida registral pre-independizada, garantizando seguridad jurídica para los compradores.
                             </div>
                         </div>
-                        
-                        <div class="document-card">
-                            <div class="document-icon">
-                                <i class="fas fa-building"></i>
+                        <div class="info-card">
+                            <div class="info-card-title">
+                                <i class="fas fa-coins"></i>
+                                Forma de Pago
                             </div>
-                            <div class="document-info">
-                                <h4 class="document-title">Licencia de Construcción</h4>
-                                <p class="document-description">Licencia municipal de construcción para el Edificio Akí San Miguel.</p>
-                                <a href="#" class="document-link">Descargar <i class="fas fa-download"></i></a>
-                            </div>
-                        </div>
-                        
-                        <div class="document-card">
-                            <div class="document-icon">
-                                <i class="fas fa-drafting-compass"></i>
-                            </div>
-                            <div class="document-info">
-                                <h4 class="document-title">Planos del Proyecto</h4>
-                                <p class="document-description">Planos arquitectónicos aprobados por la Municipalidad de San Miguel.</p>
-                                <a href="#" class="document-link">Descargar <i class="fas fa-download"></i></a>
-                            </div>
-                        </div>
-                        
-                        <div class="document-card">
-                            <div class="document-icon">
-                                <i class="fas fa-balance-scale"></i>
-                            </div>
-                            <div class="document-info">
-                                <h4 class="document-title">Ficha Técnica</h4>
-                                <p class="document-description">Ficha técnica detallada del Edificio Akí San Miguel.</p>
-                                <a href="#" class="document-link">Descargar <i class="fas fa-download"></i></a>
-                            </div>
-                        </div>
-                        
-                        <div class="document-card">
-                            <div class="document-icon">
-                                <i class="fas fa-receipt"></i>
-                            </div>
-                            <div class="document-info">
-                                <h4 class="document-title">Valorizaciones</h4>
-                                <p class="document-description">Valorizaciones actualizadas de los departamentos y estacionamientos.</p>
-                                <a href="#" class="document-link">Descargar <i class="fas fa-download"></i></a>
+                            <div class="info-card-content">
+                                Aceptamos diferentes modalidades de pago: contado, financiamiento bancario y cuotas mensuales. Las condiciones específicas se detallan en cada caso.
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="transparency-section">
-                    <h3 class="transparency-section-title">4. Información Financiera y Comercial</h3>
-                    <p class="transparency-content">De conformidad con las normas de transparencia comercial, presentamos información financiera y comercial relevante:</p>
-                    
-                    <div class="transparency-subsection">
-                        <h4 class="transparency-section-title">4.1. Precios de Venta</h4>
-                        <p class="transparency-content">Los precios de venta de los departamentos y estacionamientos del Edificio Akí San Miguel son los siguientes:</p>
-                        
-                        <table class="info-table">
-                            <tr>
-                                <th>Tipo de Departamento</th>
-                                <th>Área (m²)</th>
-                                <th>Precio (USD)</th>
-                                <th>Precio por m² (USD)</th>
-                            </tr>
-                            <tr>
-                                <td>Tipo 1 (1 dormitorio)</td>
-                                <td>30 - 38</td>
-                                <td>85,000 - 95,000</td>
-                                <td>2,500 - 2,800</td>
-                            </tr>
-                            <tr>
-                                <td>Tipo 2 (1 dormitorio)</td>
-                                <td>35 - 51</td>
-                                <td>95,000 - 110,000</td>
-                                <td>2,500 - 2,800</td>
-                            </tr>
-                            <tr>
-                                <td>Tipo 3 (3 dormitorios)</td>
-                                <td>70</td>
-                                <td>190,000 - 210,000</td>
-                                <td>2,700 - 3,000</td>
-                            </tr>
-                            <tr>
-                                <td>Tipo 4 (1 dormitorio)</td>
-                                <td>32</td>
-                                <td>90,000 - 100,000</td>
-                                <td>2,800 - 3,100</td>
-                            </tr>
-                            <tr>
-                                <td>Tipo 5 (1 dormitorio)</td>
-                                <td>55</td>
-                                <td>140,000 - 155,000</td>
-                                <td>2,500 - 2,800</td>
-                            </tr>
-                            <tr>
-                                <td>Tipo 6 (Dúplex)</td>
-                                <td>102.08</td>
-                                <td>280,000 - 310,000</td>
-                                <td>2,700 - 3,000</td>
-                            </tr>
-                            <tr>
-                                <td>Tipo 7 (Dúplex)</td>
-                                <td>83.76</td>
-                                <td>230,000 - 250,000</td>
-                                <td>2,700 - 3,000</td>
-                            </tr>
-                            <tr>
-                                <td>Estacionamiento para auto</td>
-                                <td>12.5</td>
-                                <td>15,000 - 18,000</td>
-                                <td>1,200 - 1,440</td>
-                            </tr>
-                            <tr>
-                                <td>Estacionamiento para bicicleta</td>
-                                <td>2.5</td>
-                                <td>3,000 - 4,000</td>
-                                <td>1,200 - 1,600</td>
-                            </tr>
-                        </table>
-                        
-                        <div class="transparency-highlight">
-                            <p>Los precios están expresados en dólares americanos e incluyen IGV. Los precios pueden estar sujetos a cambios sin previo aviso para unidades que aún no cuenten con contrato de compraventa firmado.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="transparency-subsection">
-                        <h4 class="transparency-section-title">4.2. Formas de Pago</h4>
-                        <p class="transparency-content">Ofrecemos las siguientes formas de pago para la adquisición de los inmuebles:</p>
-                        
-                        <ul class="transparency-list">
-                            <li><i class="fas fa-money-bill-wave"></i> <strong>Contado:</strong> Pago único con descuento del 5% sobre el valor total del inmueble.</li>
-                            <li><i class="fas fa-calendar-alt"></i> <strong>Preventa con cuotas:</strong> 30% inicial y el saldo financiado en cuotas mensuales durante la construcción.</li>
-                            <li><i class="fas fa-home"></i> <strong>Financiamiento bancario:</strong> 30% inicial y el saldo a través de crédito hipotecario con la entidad financiera de elección del cliente.</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="transparency-subsection">
-                        <h4 class="transparency-section-title">4.3. Información Tributaria</h4>
-                        <p class="transparency-content">Información tributaria relevante de PROYECTOS AKI S.A.C.:</p>
-                        
-                        <table class="info-table">
-                            <tr>
-                                <th width="30%">Concepto</th>
-                                <th>Información</th>
-                            </tr>
-                            <tr>
-                                <td><strong>RUC</strong></td>
-                                <td>20612345678</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Condición del Contribuyente</strong></td>
-                                <td>Principal - Activo</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Tipo de Contribuyente</strong></td>
-                                <td>Persona Jurídica</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Estado del Contribuyente</strong></td>
-                                <td>Hábil</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Sistema de Tributación</strong></td>
-                                <td>Impuesto a la Renta - Tercera Categoría</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Agente de Retención</strong></td>
-                                <td>Sí</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Agente de Percepción</strong></td>
-                               >No</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                
-                <div class="transparency-section">
-                    <h3 class="transparency-section-title">5. Información sobre Protección al Consumidor</h3>
-                    <p class="transparency-content">En cumplimiento del Código de Protección y Defensa del Consumidor (Ley N° 29571), informamos lo siguiente:</p>
-                    
-                    <ul class="transparency-list">
-                        <li><i class="fas fa-book"></i> <strong>Derechos del Consumidor:</strong> Todo cliente tiene derecho a recibir información veraz, suficiente, clara y oportuna sobre los productos y servicios ofrecidos; a la protección de sus intereses económicos; a la reparación o reposición del producto en caso de defectos; y a una atención digna y respetuosa.</li>
-                        <li><i class="fas fa-file-contract"></i> <strong>Contrato de Adhesión:</strong> Los contratos de compraventa son contratos de adhesión que contienen cláusulas aprobadas por INDECOPI, en cumplimiento del artículo 139 del Código de Protección y Defensa del Consumidor.</li>
-                        <li><i class="fas fa-clipboard-list"></i> <strong>Libro de Reclamaciones:</strong> Contamos con un Libro de Reclamaciones físico en nuestra oficina de ventas y un formulario virtual disponible en nuestra página web, en cumplimiento del artículo 48 del Código de Protección y Defensa del Consumidor.</li>
-                        <li><i class="fas fa-balance-scale"></i> <strong>Arbitraje de Consumo:</strong> En caso de controversias, ofrecemos el Arbitraje de Consumo como mecanismo alternativo de solución de conflictos, de conformidad con el Decreto Legislativo N° 1071 y el Decreto Supremo N° 014-2011-JUS.</li>
+                    <h3 class="transparency-section-title"><i class="fas fa-handshake"></i>Nuestro Compromiso</h3>
+                    <ul class="info-list">
+                        <li><i class="fas fa-check"></i> <strong>Calidad:</strong> Utilizamos materiales de primera calidad y cumplimos con todas las normativas de construcción vigentes.</li>
+                        <li><i class="fas fa-check"></i> <strong>Transparencia:</strong> Proporcionamos información clara y completa sobre costos, plazos y condiciones.</li>
+                        <li><i class="fas fa-check"></i> <strong>Atención al cliente:</strong> Ofrecemos asesoría personalizada durante todo el proceso de compra.</li>
+                        <li><i class="fas fa-check"></i> <strong>Entrega puntual:</strong> Nos comprometemos a cumplir con los plazos de entrega establecidos.</li>
+                        <li><i class="fas fa-check"></i> <strong>Garantía:</strong> Ofrecemos las garantías legales correspondientes a la construcción.</li>
                     </ul>
                 </div>
                 
                 <div class="transparency-section">
-                    <h3 class="transparency-section-title">6. Información sobre Prevención del Lavado de Activos y Financiamiento del Terrorismo</h3>
-                    <p class="transparency-content">De conformidad con la Ley N° 29038, Ley que establece medidas para la prevención del lavado de activos y el financiamiento del terrorismo, y su Reglamento aprobado por el Decreto Supremo N° 006-2017-EF, informamos lo siguiente:</p>
-                    
-                    <ul class="transparency-list">
-                        <li><i class="fas fa-user-secret"></i> <strong>Política de Conocimiento del Cliente:</strong> Hemos implementado políticas y procedimientos para identificar y verificar la identidad de nuestros clientes, así como para monitorear operaciones inusuales.</li>
-                        <li><i class="fas fa-shield-alt"></i> <strong>Oficial de Cumplimiento:</strong> Contamos con un Oficial de Cumplimiento designado, responsable de supervisar el cumplimiento de las normas de prevención del lavado de activos y financiamiento del terrorismo.</li>
-                        <li><i class="fas fa-exclamation-triangle"></i> <strong>Reporte de Operaciones Sospechosas:</strong> En caso de detectar operaciones sospechosas, estamos obligados a reportarlas a la Unidad de Inteligencia Financiera del Perú (UIF).</li>
-                        <li><i class="fas fa-file-contract"></i> <strong>Declaración Jurada:</strong> Los clientes deben suscribir una declaración jurada en la que manifiestan que los fondos utilizados para la adquisición del inmueble provienen de actividades lícitas.</li>
+                    <h3 class="transparency-section-title"><i class="fas fa-balance-scale"></i>Información Financiera</h3>
+                    <p class="transparency-content">Proyectos AKI S.A.C. mantiene una gestión financiera transparente y responsable:</p>
+                    <ul class="info-list">
+                        <li><i class="fas fa-check"></i> Los fondos de los clientes son gestionados en cuentas separadas del capital de la empresa.</li>
+                        <li><i class="fas fa-check"></i> Contamos con asesoría legal y financiera profesional.</li>
+                        <li><i class="fas fa-check"></i> Cumplimos con todas las obligaciones tributarias y laborales.</li>
+                        <li><i class="fas fa-check"></i> Los pagos son debidamente documentados y registrados.</li>
                     </ul>
                 </div>
                 
                 <div class="transparency-section">
-                    <h3 class="transparency-section-title">7. Contacto para Consultas</h3>
-                    <p class="transparency-content">Para cualquier consulta relacionada con la información presentada en esta sección de Transparencia Comercial, puedes contactarnos a través de:</p>
-                    
-                    <ul class="transparency-list">
-                        <li><i class="fas fa-envelope"></i> <strong>Correo electrónico:</strong> transparencia@proyectosaki.com</li>
-                        <li><i class="fas fa-phone-alt"></i> <strong>Teléfono:</strong> +51 915 214 505</li>
-                        <li><i class="fas fa-map-marker-alt"></i> <strong>Domicilio:</strong> Av. La Marina 1234, San Miguel, Lima, Perú</li>
+                    <h3 class="transparency-section-title"><i class="fas fa-user-shield"></i>Protección al Consumidor</h3>
+                    <p class="transparency-content">Respetamos y cumplimos con todos los derechos del consumidor establecidos en el Código de Protección y Defensa del Consumidor:</p>
+                    <ul class="info-list">
+                        <li><i class="fas fa-check"></i> Información veraz y completa sobre el producto</li>
+                        <li><i class="fas fa-check"></i> Contratos claros y comprensibles</li>
+                        <li><i class="fas fa-check"></i> Respeto a los plazos y condiciones acordadas</li>
+                        <li><i class="fas fa-check"></i> Atención de reclamos y quejas según los procedimientos establecidos</li>
+                        <li><i class="fas fa-check"></i> Garantía por defectos o vicios ocultos</li>
+                    </ul>
+                </div>
+                
+                <div class="transparency-section">
+                    <h3 class="transparency-section-title"><i class="fas fa-comments"></i>Canal de Atención</h3>
+                    <p class="transparency-content">Para cualquier consulta, reclamo o solicitud de información, ponemos a tu disposición los siguientes canales:</p>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-card-title">
+                                <i class="fas fa-envelope"></i>
+                                Correo Electrónico
+                            </div>
+                            <div class="info-card-content">
+                                proyectosaki@gmail.com<br>
+                                Respuesta en 24 horas hábiles
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-card-title">
+                                <i class="fas fa-phone"></i>
+                                Teléfono
+                            </div>
+                            <div class="info-card-content">
+                                +51 915 214 505<br>
+                                Lunes a viernes, 9:00 - 18:00
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-card-title">
+                                <i class="fab fa-whatsapp"></i>
+                                WhatsApp
+                            </div>
+                            <div class="info-card-content">
+                                +51 915 214 505<br>
+                                Atención inmediata
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="transparency-section">
+                    <h3 class="transparency-section-title"><i class="fas fa-file-alt"></i>Documentos Disponibles</h3>
+                    <p class="transparency-content">Los siguientes documentos están disponibles para consulta previa en nuestras oficinas:</p>
+                    <ul class="info-list">
+                        <li><i class="fas fa-check"></i> Partida registral de la empresa</li>
+                        <li><i class="fas fa-check"></i> Licencia de construcción</li>
+                        <li><i class="fas fa-check"></i> Planos aprobados por la municipalidad</li>
+                        <li><i class="fas fa-check"></i> Certificado de conformidad de uso de suelo</li>
+                        <li><i class="fas fa-check"></i> Estudios de suelos y geotécnicos</li>
                     </ul>
                 </div>
                 
                 <div class="transparency-highlight">
-                    <p>La información presentada en esta sección de Transparencia Comercial es actualizada periódicamente para garantizar su veracidad y vigencia. Cualquier cambio o modificación será comunicado oportunamente a través de nuestros canales oficiales.</p>
+                    <p><strong>En Proyectos AKI S.A.C., valoramos tu confianza y nos comprometemos a mantener los más altos estándares de transparencia y ética en todas nuestras operaciones comerciales.</strong></p>
                 </div>
             </div>
         </div>
@@ -889,10 +713,16 @@
                         <img src="https://z-cdn-media.chatglm.cn/files/aab548ee-032c-40fc-ba4d-80070c973132_logo.png?auth_key=1789335585-7f63306adb0e47ac863d27f034d8e75b-0-f93f5c0d88186949b24959f2cbd5f269" alt="Logo de Proyectos AKÍ" class="logo-img">
                     </div>
                     <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; line-height: 1.8;">Desarrollamos espacios que transforman vidas y crean comunidades. Experiencia creando proyectos inmobiliarios de calidad.</p>
-                    <div class="social-icons mt-4">
-                        <a href="https://www.facebook.com/proyectosaki" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Proyectos Akí"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/proyectosaki" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Proyectos Akí"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.tiktok.com/@proyectos.aki" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Proyectos Akí"><i class="fab fa-tiktok"></i></a>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=61580465416126" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Proyectos Akí" style="z-index: 1000; position: relative;">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/proyectosaki_25?igsh=MWh0ajlvdzZmc3VnZw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Proyectos Akí" style="z-index: 1000; position: relative;">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@proyectosaki?_t=ZS-90x9rvPSa8t&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Proyectos Akí" style="z-index: 1000; position: relative;">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-4">
@@ -912,8 +742,6 @@
                     <ul class="footer-links">
                         <li><a href="privacidad.html">Política de Privacidad</a></li>
                         <li><a href="terminos.html">Términos y Condiciones</a></li>
-                        <li><a href="cookies.html">Política de Cookies</a></li>
-                        <li><a href="atencion.html">Atención al Cliente</a></li>
                         <li><a href="transparencia.html">Transparencia Comercial</a></li>
                     </ul>
                 </div>
@@ -958,6 +786,17 @@
             } else {
                 navbar.style.backgroundColor = 'rgba(5, 10, 8, 0.9)';
             }
+        });
+        
+        // Asegurar que los enlaces de redes sociales sean clickeables
+        document.addEventListener('DOMContentLoaded', function() {
+            const socialLinks = document.querySelectorAll('.social-icons a');
+            socialLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    // No prevenir el comportamiento predeterminado para que el enlace funcione
+                    console.log('Enlace de red social clickeado:', this.href);
+                });
+            });
         });
     </script>
 </body>
