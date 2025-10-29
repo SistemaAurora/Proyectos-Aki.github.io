@@ -1346,6 +1346,179 @@
             background-color: rgba(212, 175, 55, 0.2);
             color: var(--aki-gold);
         }
+        
+        /* Estilos para la nueva sección de departamentos compacta */
+        .apartment-types-container {
+            background: linear-gradient(145deg, rgba(5, 10, 8, 0.9), rgba(5, 10, 8, 0.7));
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .apartment-tabs .nav-pills .nav-link {
+            background-color: rgba(5, 10, 8, 0.7);
+            color: var(--light-color);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
+            margin: 0 5px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .apartment-tabs .nav-pills .nav-link:hover {
+            background-color: rgba(212, 175, 55, 0.2);
+            color: var(--aki-gold);
+            border-color: var(--aki-gold);
+        }
+        
+        .apartment-tabs .nav-pills .nav-link.active {
+            background-color: var(--aki-gold);
+            color: var(--aki-green);
+            border-color: var(--aki-gold);
+        }
+        
+        .apartment-showcase {
+            position: relative;
+        }
+        
+        .apartment-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .apartment-image-container img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s;
+        }
+        
+        .apartment-image-container:hover img {
+            transform: scale(1.05);
+        }
+        
+        .apartment-selector-btn {
+            background-color: rgba(5, 10, 8, 0.7);
+            color: var(--light-color);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .apartment-selector-btn:hover {
+            background-color: rgba(212, 175, 55, 0.2);
+            color: var(--aki-gold);
+            border-color: var(--aki-gold);
+        }
+        
+        .apartment-selector-btn.active {
+            background-color: var(--aki-gold);
+            color: var(--aki-green);
+            border-color: var(--aki-gold);
+        }
+        
+        .apartment-details {
+            padding: 20px;
+        }
+        
+        .apartment-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--aki-gold);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .apartment-description {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+        
+        .apartment-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .spec-item {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255,255,255,0.05);
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .spec-item i {
+            color: var(--aki-gold);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .spec-item span {
+            color: var(--light-color);
+            font-weight: 600;
+        }
+        
+        .apartment-features h4 {
+            color: var(--aki-gold);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .apartment-features-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .apartment-features-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .apartment-features-list li i {
+            color: var(--aki-gold);
+            margin-right: 10px;
+        }
+        
+        .apartment-availability p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 5px;
+        }
+        
+        .apartment-availability strong {
+            color: var(--aki-gold);
+        }
+        
+        /* Responsive para la nueva sección */
+        @media (max-width: 768px) {
+            .apartment-tabs .nav-pills .nav-link {
+                margin: 5px;
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .apartment-specs {
+                gap: 10px;
+            }
+            
+            .spec-item {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .apartment-title {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1756,244 +1929,291 @@
                 </div>
             </div>
             
-            <!-- Tipos de departamentos resumen -->
-            <div class="row mb-5" data-aos="fade-up" data-aos-delay="300">
+            <!-- Nuevo diseño compacto con pestañas -->
+            <div class="row" data-aos="fade-up" data-aos-delay="300">
                 <div class="col-lg-12">
-                    <div class="apartment-types-summary">
-                        <div class="row">
-                            <div class="col-md-4 mb-4">
-                                <div class="feature-box">
-                                    <div class="feature-icon">
-                                        <i class="fas fa-home"></i>
+                    <div class="apartment-types-container">
+                        <!-- Pestañas de tipos de departamentos -->
+                        <div class="apartment-tabs">
+                            <ul class="nav nav-pills mb-4 justify-content-center" id="apartment-tabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="tab-1dorm" data-bs-toggle="pill" data-bs-target="#panel-1dorm" type="button" role="tab" aria-controls="panel-1dorm" aria-selected="true">1 Dormitorio</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="tab-2dorm" data-bs-toggle="pill" data-bs-target="#panel-2dorm" type="button" role="tab" aria-controls="panel-2dorm" aria-selected="false">2 Dormitorios</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="tab-3dorm" data-bs-toggle="pill" data-bs-target="#panel-3dorm" type="button" role="tab" aria-controls="panel-3dorm" aria-selected="false">3 Dormitorios</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="tab-duplex" data-bs-toggle="pill" data-bs-target="#panel-duplex" type="button" role="tab" aria-controls="panel-duplex" aria-selected="false">Dúplex</button>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Contenido de las pestañas -->
+                        <div class="tab-content" id="apartment-tab-content">
+                            <!-- Panel 1 Dormitorio -->
+                            <div class="tab-pane fade show active" id="panel-1dorm" role="tabpanel" aria-labelledby="tab-1dorm">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="apartment-showcase">
+                                            <div class="apartment-image-container">
+                                                <img src="https://i.ibb.co/JwxsW6gd/Tipo1.png" alt="Tipo 1" class="img-fluid rounded" id="img-1dorm">
+                                            </div>
+                                            <div class="apartment-selector mt-3">
+                                                <div class="btn-group w-100" role="group">
+                                                    <button type="button" class="btn btn-outline-primary apartment-selector-btn active" data-img="https://i.ibb.co/JwxsW6gd/Tipo1.png" data-target="#img-1dorm">Tipo 1</button>
+                                                    <button type="button" class="btn btn-outline-primary apartment-selector-btn" data-img="https://i.ibb.co/WNrs2RcR/Tipo2.png" data-target="#img-1dorm">Tipo 2</button>
+                                                    <button type="button" class="btn btn-outline-primary apartment-selector-btn" data-img="https://i.ibb.co/8L7mNGN9/Tipo4.png" data-target="#img-1dorm">Tipo 4</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <h4>1 Dormitorio</h4>
-                                    <p style="color: rgba(255,255,255,0.8);">Ideales para jóvenes profesionales, estudiantes, parejas sin hijos o inversores.</p>
+                                    <div class="col-lg-6">
+                                        <div class="apartment-details">
+                                            <h3 class="apartment-title">Departamentos de 1 Dormitorio</h3>
+                                            <p class="apartment-description">Ideales para jóvenes profesionales, estudiantes, parejas sin hijos o inversores.</p>
+                                            
+                                            <div class="apartment-specs">
+                                                <div class="spec-item">
+                                                    <i class="fas fa-ruler-combined"></i>
+                                                    <span>32-51 m²</span>
+                                                </div>
+                                                <div class="spec-item">
+                                                    <i class="fas fa-bed"></i>
+                                                    <span>1 Dormitorio</span>
+                                                </div>
+                                                <div class="spec-item">
+                                                    <i class="fas fa-bath"></i>
+                                                    <span>1 Baño</span>
+                                                </div>
+                                                <div class="spec-item">
+                                                    <i class="fas fa-utensils"></i>
+                                                    <span>Kitchenet</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="apartment-features mt-4">
+                                                <h4>Características</h4>
+                                                <ul class="apartment-features-list">
+                                                    <li><i class="fas fa-check"></i> Estar/comedor</li>
+                                                    <li><i class="fas fa-check"></i> Kitchenet</li>
+                                                    <li><i class="fas fa-check"></i> Dormitorio principal</li>
+                                                    <li><i class="fas fa-check"></i> Baño completo</li>
+                                                    <li><i class="fas fa-check"></i> Lavandería (según modelo)</li>
+                                                    <li><i class="fas fa-check"></i> Terraza/patio (según modelo)</li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <div class="apartment-availability mt-4">
+                                                <p><strong>Disponibles:</strong> 7 unidades</p>
+                                                <p><strong>Vistas:</strong> Interior y exterior</p>
+                                            </div>
+                                            
+                                            <div class="mt-4">
+                                                <a href="video.html" class="btn btn-primary">Ver detalles en video</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="feature-box">
-                                    <div class="feature-icon">
-                                        <i class="fas fa-home"></i>
+                            
+                            <!-- Panel 2 Dormitorios -->
+                            <div class="tab-pane fade" id="panel-2dorm" role="tabpanel" aria-labelledby="tab-2dorm">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="apartment-showcase">
+                                            <div class="apartment-image-container">
+                                                <img src="https://i.ibb.co/rPgCgZZ/Tipo5.png" alt="Tipo 5" class="img-fluid rounded" id="img-2dorm">
+                                            </div>
+                                            <div class="apartment-selector mt-3">
+                                                <div class="btn-group w-100" role="group">
+                                                    <button type="button" class="btn btn-outline-primary apartment-selector-btn active" data-img="https://i.ibb.co/rPgCgZZ/Tipo5.png" data-target="#img-2dorm">Tipo 5</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <h4>2 Dormitorios</h4>
-                                    <p style="color: rgba(255,255,255,0.8);">Perfectos para parejas que planean crecer o pequeñas familias.</p>
+                                    <div class="col-lg-6">
+                                        <div class="apartment-details">
+                                            <h3 class="apartment-title">Departamentos de 2 Dormitorios</h3>
+                                            <p class="apartment-description">Perfectos para parejas que planean crecer o pequeñas familias.</p>
+                                            
+                                            <div class="apartment-specs">
+                                                <div class="spec-item">
+                                                    <i class="fas fa-ruler-combined"></i>
+                                                    <span>55 m²</span>
+                                                </div>
+                                                <div class="spec-item">
+                                                    <i class="fas fa-bed"></i>
+                                                    <span>2 Dormitorios</span>
+                                                </div>
+                                                <div class="spec-item">
+                                                    <i class="fas fa-bath"></i>
+                                                    <span>1 Baño</span>
+                                                </div>
+                                                <div class="spec-item">
+                                                    <i class="fas fa-utensils"></i>
+                                                    <span>Kitchenet</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="apartment-features mt-4">
+                                                <h4>Características</h4>
+                                                <ul class="apartment-features-list">
+                                                    <li><i class="fas fa-check"></i> Pasaje de entrada</li>
+                                                    <li><i class="fas fa-check"></i> Estar/comedor</li>
+                                                    <li><i class="fas fa-check"></i> Kitchenet</li>
+                                                    <li><i class="fas fa-check"></i> 2 Dormitorios</li>
+                                                    <li><i class="fas fa-check"></i> Baño completo</li>
+                                                    <li><i class="fas fa-check"></i> Escritorio</li>
+                                                    <li><i class="fas fa-check"></i> Lavandería</li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <div class="apartment-availability mt-4">
+                                                <p><strong>Disponibles:</strong> 3 unidades</p>
+                                                <p><strong>Vistas:</strong> Interior</p>
+                                            </div>
+                                            
+                                            <div class="mt-4">
+                                                <a href="video.html" class="btn btn-primary">Ver detalles en video</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="feature-box">
-                                    <div class="feature-icon">
-                                        <i class="fas fa-home"></i>
+                            
+                            <!-- Panel 3 Dormitorios -->
+                            <div class="tab-pane fade" id="panel-3dorm" role="tabpanel" aria-labelledby="tab-3dorm">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="apartment-showcase">
+                                            <div class="apartment-image-container">
+                                                <img src="https://i.ibb.co/zhmSWhSq/Tipo3.png" alt="Tipo 3" class="img-fluid rounded" id="img-3dorm">
+                                            </div>
+                                            <div class="apartment-selector mt-3">
+                                                <div class="btn-group w-100" role="group">
+                                                    <button type="button" class="btn btn-outline-primary apartment-selector-btn active" data-img="https://i.ibb.co/zhmSWhSq/Tipo3.png" data-target="#img-3dorm">Tipo 3</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <h4>3 Dormitorios</h4>
-                                    <p style="color: rgba(255,255,255,0.8);">Diseñados para familias que buscan amplitud y privacidad.</p>
+                                    <div class="col-lg-6">
+                                        <div class="apartment-details">
+                                            <h3 class="apartment-title">Departamentos de 3 Dormitorios</h3>
+                                            <p class="apartment-description">Diseñados para familias que buscan amplitud y privacidad.</p>
+                                            
+                                            <div class="apartment-specs">
+                                                <div class="spec-item">
+                                                    <i class="fas fa-ruler-combined"></i>
+                                                    <span>70 m²</span>
+                                                </div>
+                                                <div class="spec-item">
+                                                    <i class="fas fa-bed"></i>
+                                                    <span>3 Dormitorios</span>
+                                                </div>
+                                                <div class="spec-item">
+                                                    <i class="fas fa-bath"></i>
+                                                    <span>2 Baños</span>
+                                                </div>
+                                                <div class="spec-item">
+                                                    <i class="fas fa-utensils"></i>
+                                                    <span>Cocina integral</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="apartment-features mt-4">
+                                                <h4>Características</h4>
+                                                <ul class="apartment-features-list">
+                                                    <li><i class="fas fa-check"></i> Sala/comedor amplio</li>
+                                                    <li><i class="fas fa-check"></i> Balcón</li>
+                                                    <li><i class="fas fa-check"></i> Cocina integral</li>
+                                                    <li><i class="fas fa-check"></i> 3 Dormitorios</li>
+                                                    <li><i class="fas fa-check"></i> 2 Baños completos</li>
+                                                    <li><i class="fas fa-check"></i> Lavandería</li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <div class="apartment-availability mt-4">
+                                                <p><strong>Disponibles:</strong> 3 unidades</p>
+                                                <p><strong>Vistas:</strong> Exterior</p>
+                                            </div>
+                                            
+                                            <div class="mt-4">
+                                                <a href="video.html" class="btn btn-primary">Ver detalles en video</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Panel Dúplex -->
+                            <div class="tab-pane fade" id="panel-duplex" role="tabpanel" aria-labelledby="tab-duplex">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="apartment-showcase">
+                                            <div class="apartment-image-container">
+                                                <img src="https://i.ibb.co/yMnbSR0/Tipo6.png" alt="Tipo 6" class="img-fluid rounded" id="img-duplex">
+                                            </div>
+                                            <div class="apartment-selector mt-3">
+                                                <div class="btn-group w-100" role="group">
+                                                    <button type="button" class="btn btn-outline-primary apartment-selector-btn active" data-img="https://i.ibb.co/yMnbSR0/Tipo6.png" data-target="#img-duplex">Tipo 6</button>
+                                                    <button type="button" class="btn btn-outline-primary apartment-selector-btn" data-img="https://i.ibb.co/tPNxBqqK/Tipo7.png" data-target="#img-duplex">Tipo 7</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="apartment-details">
+                                            <h3 class="apartment-title">Dúplex Exclusivos</h3>
+                                            <p class="apartment-description">La joya de la corona. Los departamentos del quinto piso te brindan acceso exclusivo a tu propia azotea privada, un oasis personal sin áreas comunes.</p>
+                                            
+                                            <div class="apartment-specs">
+                                                <div class="spec-item">
+                                                    <i class="fas fa-ruler-combined"></i>
+                                                    <span>123-133 m²</span>
+                                                </div>
+                                                <div class="spec-item">
+                                                    <i class="fas fa-bed"></i>
+                                                    <span>2-3 Dormitorios</span>
+                                                </div>
+                                                <div class="spec-item">
+                                                    <i class="fas fa-bath"></i>
+                                                    <span>2 Baños</span>
+                                                </div>
+                                                <div class="spec-item">
+                                                    <i class="fas fa-utensils"></i>
+                                                    <span>Cocina integral</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="apartment-features mt-4">
+                                                <h4>Características</h4>
+                                                <ul class="apartment-features-list">
+                                                    <li><i class="fas fa-check"></i> Dos niveles independientes</li>
+                                                    <li><i class="fas fa-check"></i> Sala/comedor en ambos niveles</li>
+                                                    <li><i class="fas fa-check"></i> Balcón y terraza privada</li>
+                                                    <li><i class="fas fa-check"></i> Cocina integral</li>
+                                                    <li><i class="fas fa-check"></i> 2-3 Dormitorios</li>
+                                                    <li><i class="fas fa-check"></i> 2 Baños completos</li>
+                                                    <li><i class="fas fa-check"></i> Azotea privada exclusiva</li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <div class="apartment-availability mt-4">
+                                                <p><strong>Disponibles:</strong> 2 unidades</p>
+                                                <p><strong>Vistas:</strong> Interior y exterior</p>
+                                            </div>
+                                            
+                                            <div class="mt-4">
+                                                <a href="video.html" class="btn btn-primary">Ver detalles en video</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Dúplex Section -->
-            <div class="row mb-5">
-                <div class="col-lg-12">
-                    <div class="duplex-special" data-aos="fade-up">
-                        <h3 class="text-center mb-4" style="color: var(--aki-gold); font-size: 2rem; font-weight: 700;">Dúplex Exclusivos</h3>
-                        <p class="text-center" style="color: rgba(255,255,255,0.9); font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto;">
-                            Nuestros dúplex en los pisos 5 y 6 son la joya de la corona. Los departamentos del quinto piso te brindan acceso exclusivo a tu propia azotea privada, 
-                            un oasis personal sin áreas comunes, perfecto para tus momentos de relax o reuniones inolvidables. Disfruta de la amplitud y la privacidad que solo un dúplex puede ofrecer.
-                        </p>
-                        <div class="text-center mt-4">
-                            <a href="video.html" class="btn btn-primary">Ver detalles de los dúplex</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tipo 1 -->
-            <div class="row mb-5">
-                <div class="col-lg-12">
-                    <h3 class="text-center mb-4" data-aos="fade-up" style="color: var(--aki-gold); font-size: 1.8rem; font-weight: 700;">Tipo 1</h3>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-right">
-                    <div class="floor-plan-container">
-                        <h4 class="floor-plan-title">Dpto 101</h4>
-                        <img src="https://i.ibb.co/JwxsW6gd/Tipo1.png" alt="Tipo 1" class="floor-plan" loading="lazy">
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-left">
-                    <div class="floor-plan-details">
-                        <h5>Características</h5>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Área techada:</strong> 30 m² | <strong>Área ocupada:</strong> 38 m²</p>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Vista:</strong> Interior</p>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Estar</li>
-                            <li><i class="fas fa-check"></i> Kitchenet</li>
-                            <li><i class="fas fa-check"></i> Baño</li>
-                            <li><i class="fas fa-check"></i> Dormitorio</li>
-                            <li><i class="fas fa-check"></i> Jardineria</li>
-                            <li><i class="fas fa-check"></i> Patio</li>
-                            <li><i class="fas fa-check"></i> Lavandería</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tipo 2 -->
-            <div class="row mb-5">
-                <div class="col-lg-12">
-                    <h3 class="text-center mb-4" data-aos="fade-up" style="color: var(--aki-gold); font-size: 1.8rem; font-weight: 700;">Tipo 2</h3>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-right">
-                    <div class="floor-plan-container">
-                        <h4 class="floor-plan-title">Dpto 102</h4>
-                        <img src="https://i.ibb.co/WNrs2RcR/Tipo2.png" alt="Tipo 2" class="floor-plan" loading="lazy">
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-left">
-                    <div class="floor-plan-details">
-                        <h5>Características</h5>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Área techada:</strong> 35 m² | <strong>Área ocupada:</strong> 51 m²</p>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Vista:</strong> Interior</p>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Estar</li>
-                            <li><i class="fas fa-check"></i> Kitchenet</li>
-                            <li><i class="fas fa-check"></i> Baño</li>
-                            <li><i class="fas fa-check"></i> Dormitorio</li>
-                            <li><i class="fas fa-check"></i> Terraza</li>
-                            <li><i class="fas fa-check"></i> Patio</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tipo 3 -->
-            <div class="row mb-5">
-                <div class="col-lg-12">
-                    <h3 class="text-center mb-4" data-aos="fade-up" style="color: var(--aki-gold); font-size: 1.8rem; font-weight: 700;">Tipo 3</h3>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-right">
-                    <div class="floor-plan-container">
-                        <h4 class="floor-plan-title">Dptos 201 - 301 - 401</h4>
-                        <img src="https://i.ibb.co/zhmSWhSq/Tipo3.png" alt="Tipo 3" class="floor-plan" loading="lazy">
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-left">
-                    <div class="floor-plan-details">
-                        <h5>Características</h5>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Área techada:</strong> 70 m² | <strong>Área ocupada:</strong> 70 m²</p>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Vista:</strong> Exterior</p>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Sala comedor</li>
-                            <li><i class="fas fa-check"></i> Balcón</li>
-                            <li><i class="fas fa-check"></i> Cocina</li>
-                            <li><i class="fas fa-check"></i> 2 Baños</li>
-                            <li><i class="fas fa-check"></i> Lavandería</li>
-                            <li><i class="fas fa-check"></i> 3 Dormitorios</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tipo 4 -->
-            <div class="row mb-5">
-                <div class="col-lg-12">
-                    <h3 class="text-center mb-4" data-aos="fade-up" style="color: var(--aki-gold); font-size: 1.8rem; font-weight: 700;">Tipo 4</h3>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-right">
-                    <div class="floor-plan-container">
-                        <h4 class="floor-plan-title">Dptos 202 - 302 - 402 - 502</h4>
-                        <img src="https://i.ibb.co/8L7mNGN9/Tipo4.png" alt="Tipo 4" class="floor-plan" loading="lazy">
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-left">
-                    <div class="floor-plan-details">
-                        <h5>Características</h5>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Área techada:</strong> 32 m² | <strong>Área ocupada:</strong> 32 m²</p>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Vista:</strong> Interior</p>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Estar</li>
-                            <li><i class="fas fa-check"></i> Kitchenet</li>
-                            <li><i class="fas fa-check"></i> Baño</li>
-                            <li><i class="fas fa-check"></i> Dormitorio</li>
-                            <li><i class="fas fa-check"></i> Lavandería</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tipo 5 -->
-            <div class="row mb-5">
-                <div class="col-lg-12">
-                    <h3 class="text-center mb-4" data-aos="fade-up" style="color: var(--aki-gold); font-size: 1.8rem; font-weight: 700;">Tipo 5</h3>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-right">
-                    <div class="floor-plan-container">
-                        <h4 class="floor-plan-title">Dptos 203 - 303 - 403</h4>
-                        <img src="https://i.ibb.co/rPgCgZZ/Tipo5.png" alt="Tipo 5" class="floor-plan" loading="lazy">
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-left">
-                    <div class="floor-plan-details">
-                        <h5>Características</h5>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Área techada:</strong> 55 m² | <strong>Área ocupada:</strong> 55 m²</p>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Vista:</strong> Interior</p>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Pasaje</li>
-                            <li><i class="fas fa-check"></i> Estar</li>
-                            <li><i class="fas fa-check"></i> Kitchenet</li>
-                            <li><i class="fas fa-check"></i> Baño</li>
-                            <li><i class="fas fa-check"></i> Dormitorio</li>
-                            <li><i class="fas fa-check"></i> Escritorio</li>
-                            <li><i class="fas fa-check"></i> Lavandería</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tipo 6 (Dúplex) -->
-            <div class="row mb-5">
-                <div class="col-lg-12">
-                    <h3 class="text-center mb-4" data-aos="fade-up" style="color: var(--aki-gold); font-size: 1.8rem; font-weight: 700;">Tipo 6 (Dúplex)</h3>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-right">
-                    <div class="floor-plan-container">
-                        <h4 class="floor-plan-title">Dpto 501</h4>
-                        <img src="https://i.ibb.co/yMnbSR0/Tipo6.png" alt="Tipo 6" class="floor-plan" loading="lazy">
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-left">
-                    <div class="floor-plan-details">
-                        <h5>Características</h5>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Primer Nivel:</strong> 69.26 m² | <strong>Segundo Nivel:</strong> 32.82 m²</p>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Vista:</strong> Exterior</p>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Primer Nivel: Sala comedor, Balcón, Cocina, 2 Dormitorios, 2 baños</li>
-                            <li><i class="fas fa-check"></i> Segundo Nivel: Sala comedor, Balcón, Cocina, 2 baños, 1 dormitorio</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tipo 7 (Dúplex) -->
-            <div class="row mb-5">
-                <div class="col-lg-12">
-                    <h3 class="text-center mb-4" data-aos="fade-up" style="color: var(--aki-gold); font-size: 1.8rem; font-weight: 700;">Tipo 7 (Dúplex)</h3>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-right">
-                    <div class="floor-plan-container">
-                        <h4 class="floor-plan-title">Dpto 503</h4>
-                        <img src="https://i.ibb.co/tPNxBqqK/Tipo7.png" alt="Tipo 7" class="floor-plan" loading="lazy">
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4" data-aos="fade-left">
-                    <div class="floor-plan-details">
-                        <h5>Características</h5>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Primer Nivel:</strong> 53.74 m² | <strong>Segundo Nivel:</strong> 30.02 m²</p>
-                        <p style="color: var(--aki-gold); font-size: 1.1rem; font-weight: 600;"><strong>Vista:</strong> Interior</p>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Primer Nivel: Pasaje, Sala comedor, Cocina, Dormitorio, 2 baños</li>
-                            <li><i class="fas fa-check"></i> Segundo Nivel: Pasadizo, Estar, Baño, Terraza, Cuarto de servicio, Lavandería</li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -2184,9 +2404,9 @@
                         </p>
                     </div>
                     <div class="social-icons mt-4">
-                        <a href="https://www.facebook.com/proyectosaki" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Proyectos Akí"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/proyectosaki" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Proyectos Akí"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.tiktok.com/@proyectos.aki" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Proyectos Akí"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61580465416126" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Proyectos Akí"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/proyectosaki_25?igsh=MWh0ajlvdzZmc3VnZw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Proyectos Akí"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@proyectosaki?_t=ZS-90x9rvPSa8t&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Proyectos Akí"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
@@ -2345,6 +2565,29 @@
         
         // Llamar a la función para crear estrellas cuando la página se carga
         window.addEventListener('load', createStars);
+        
+        // Funcionalidad para los botones de selección de imágenes de departamentos
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectorButtons = document.querySelectorAll('.apartment-selector-btn');
+            
+            selectorButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remover la clase active de todos los botones del mismo grupo
+                    const buttonGroup = this.closest('.btn-group');
+                    buttonGroup.querySelectorAll('.apartment-selector-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Añadir la clase active al botón clickeado
+                    this.classList.add('active');
+                    
+                    // Cambiar la imagen
+                    const imgTarget = this.getAttribute('data-target');
+                    const imgSrc = this.getAttribute('data-img');
+                    document.querySelector(imgTarget).src = imgSrc;
+                });
+            });
+        });
     </script>
 </body>
 </html>
