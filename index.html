@@ -576,7 +576,7 @@
             }
         };
 
-        function enviarPedido() {
+                function enviarPedido() {
             const nom = document.getElementById('nombre').value;
             const cel = document.getElementById('celular').value;
             const dir = document.getElementById('direccion').value;
@@ -603,7 +603,11 @@
                 `*Pago:* CONTRA ENTREGA%0A%0A` +
                 `_Deseo confirmar mi pedido con envío veloz._`;
 
-            window.open(`https://api.whatsapp.com/send?phone=${WSP_NUMBER}&text=${text}`, '_blank');
+            // --- CAMBIO CLAVE: Damos tiempo al Pixel ---
+            setTimeout(function() {
+                window.open(`https://api.whatsapp.com/send?phone=${WSP_NUMBER}&text=${text}`, '_blank');
+            }, 500);
+            // -------------------------------------------
         }
     </script>
 </body>
