@@ -613,6 +613,8 @@
     .hero-marks .hero-mark { pointer-events: auto; }
     .zoom-veil { transition-duration: 120ms; }
   }
+
+  .hero-marks { display: none; }
 </style>
 </head>
 <body class="bg-background text-on-surface antialiased selection:bg-secondary selection:text-white">
@@ -1638,7 +1640,7 @@
   }
 
   function goToFloor(floor) {
-    if (zooming) return;
+    if (zooming || !veil) return;
     var mark = marks.querySelector('[data-floor="' + floor + '"]');
     var pr = plane.getBoundingClientRect();
     var mr = mark.getBoundingClientRect();
@@ -1733,7 +1735,7 @@
    real assets that live in this project, by context, with a catch-all so
    nothing is left pointing outside. */
 (function () {
-  var PLANS = ['assets/ficha-tipo-2.webp','assets/ficha-tipo-3.webp','assets/ficha-tipo-6.webp','assets/ficha-tipo-7.webp'];
+  var FICHAS = {"2":"assets/ficha-tipo-2.webp","3":"assets/ficha-tipo-3.webp","6":"assets/ficha-tipo-6.webp","7":"assets/ficha-tipo-7.webp"};
   var RENDERS = ['assets/interior-cocina.webp','assets/gal-07.webp','assets/gal-05.webp','assets/ubicacion.webp'];
   var FALLBACK = 'assets/ubicacion.webp';
 
@@ -1749,25 +1751,47 @@
 
   function isRemote(v) { return typeof v === 'string' && v.indexOf('lh3.googleusercontent.com') !== -1; }
 
-  function fixImg(img, k) {
-    if (!isRemote(img.getAttribute('src'))) return;
+  function typeOf(el) {
+    var t = ((el && el.textContent) || '') + ' ' + ((el && el.id) || '');
+    var m = t.match(/Tipo\s*([1-7])/i);
+    return m ? +m[1] : 0;
+  }
+
+  function fixImg(img) {
+    var src = img.getAttribute('src') || '';
     var alt = (img.getAttribute('alt') || '').toLowerCase();
-    var src;
-    if (alt.indexOf('logo') !== -1) src = 'assets/logo-ink.png';
-    else if (img.closest('#typology-cards-container') || img.closest('[id*="tipolog"]')) src = PLANS[k % PLANS.length];
-    else if (img.closest('#showroom') || img.closest('[id*="showroom"]')) src = RENDERS[k % RENDERS.length];
-    else if (img.id === 'hero-interactive-img') src = RENDERS[3];
-    else src = FALLBACK;
-    img.setAttribute('src', src);
+    if (alt.indexOf('logo') !== -1) { img.setAttribute('src', 'assets/logo-ink.png'); return; }
+    // a typology card carries ITS OWN ficha; a type without one shows nothing
+    // rather than a neighbour's plan
+    var card = img.closest('#estilo-vida article, #typology-cards-container article');
+    if (card) {
+      var t = typeOf(card);
+      if (FICHAS[t]) img.setAttribute('src', FICHAS[t]);
+      else img.style.display = 'none';
+      return;
+    }
+    if (!isRemote(src)) return;
+    if (img.closest('#showroom')) { img.setAttribute('src', RENDERS[2]); return; }
+    if (img.id === 'hero-interactive-img') { img.setAttribute('src', RENDERS[3]); return; }
+    img.setAttribute('src', FALLBACK);
   }
 
   function sweep() {
-    var k = 0;
-    document.querySelectorAll('img').forEach(function (img) { if (isRemote(img.getAttribute('src'))) fixImg(img, k++); });
+    document.querySelectorAll('img').forEach(function (img) {
+      var src = img.getAttribute('src') || '';
+      var card = img.closest('#estilo-vida article, #typology-cards-container article');
+      if (isRemote(src) || (card && src.indexOf('assets/ficha-') !== 0)) fixImg(img);
+    });
     // inline background images
     document.querySelectorAll('[style*="lh3.googleusercontent.com"]').forEach(function (el) {
       el.style.backgroundImage = "url('" + FALLBACK + "')";
     });
+    // the technical sheet shows the real ficha, not the drawn blueprint
+    var box = document.getElementById('modal-blueprint-box');
+    if (box && !box.querySelector('img')) {
+      var t = typeOf(document.getElementById('tech-modal'));
+      if (FICHAS[t]) box.innerHTML = '<img class="w-full h-full object-contain" src="' + FICHAS[t] + '" alt="Ficha técnica del Tipo ' + t + '">';
+    }
   }
 
   // their JS sets the hero views and re-renders the cards: keep sweeping
@@ -1786,7 +1810,7 @@
     b.href = 'brochure-aki.pdf';
     b.setAttribute('download', 'Brochure-Edificio-AKI.pdf');
     b.className = 'inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-label-technical text-xs uppercase tracking-widest mt-8';
-    b.textContent = 'Descargar dosier';
+    b.textContent = 'Descargar brochure';
     contact.appendChild(b);
   }
   var form = contact ? contact.querySelector('form') : null;
@@ -1808,7 +1832,8 @@
 <script>
 /* The removals the client asked for, in their own pass so the image handling
    above stays untouched: no showroom, no prices, no dossier button in the
-   modal, and the download button says brochure. */
+   modal. The typology cards carry the client's own ficha and their sheet
+   button opens it in a lightbox of our own. */
 (function () {
   var PRICE = /(S\/\s?\d|\$\s?\d|USD|cuota|precio|separaci[oó]n de unidad|preventa desde)/i;
   function clean() {
@@ -1821,17 +1846,18 @@
     document.querySelectorAll('#tech-modal a, #tech-modal button').forEach(function (el) {
       if (/dosier|dossier|descargar/i.test(el.textContent || '')) el.remove();
     });
-    var c = document.getElementById('contacto');
-    var d = document.getElementById('aki-dossier');
-    if (c && !d) {
-      d = document.createElement('a');
-      d.id = 'aki-dossier';
-      d.href = 'brochure-aki.pdf';
-      d.setAttribute('download', 'Brochure-Edificio-AKI.pdf');
-      d.className = 'inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-label-technical text-xs uppercase tracking-widest mt-8';
-      d.textContent = 'Descargar brochure';
-      c.appendChild(d);
-    }
+    // each card carries its own ficha at the top; a type without one stays clean
+    document.querySelectorAll('#typology-cards-container > div').forEach(function (card) {
+      if (card.querySelector('img')) return;
+      var t = cardType(card);
+      if (!FICHA_BY_TYPE[t]) return;
+      var img = document.createElement('img');
+      img.src = FICHA_BY_TYPE[t];
+      img.alt = 'Ficha técnica del Tipo ' + t;
+      img.loading = 'lazy';
+      img.className = 'w-full rounded-xl border border-outline-variant mb-4 bg-white cursor-zoom-in';
+      card.insertBefore(img, card.firstChild);
+    });
     // the legal pages the repository already carries stay reachable
     var foot = document.querySelector('footer');
     if (foot && !document.getElementById('aki-legal')) {
@@ -1845,10 +1871,74 @@
       foot.appendChild(nav);
     }
   }
+  // the ficha map is derived from the ficha list in the build script; both it
+  // and cardType must exist before the first clean() run
+  var FICHA_BY_TYPE = {"2":"assets/ficha-tipo-2.webp","3":"assets/ficha-tipo-3.webp","6":"assets/ficha-tipo-6.webp","7":"assets/ficha-tipo-7.webp"};
+  function cardType(el) {
+    var m = ((el && el.textContent) || '').match(/Tipo\s*([1-7])/i);
+    return m ? +m[1] : 0;
+  }
   var t = 0;
   new MutationObserver(function () { clearTimeout(t); t = setTimeout(clean, 150); }).observe(document.documentElement, { subtree: true, childList: true });
   window.addEventListener('load', clean);
   clean();
+
+  /* The cards' sheet buttons used to open the original modal, which depends on
+     elements the price pass removes, so they did nothing. They now open the
+     client's own ficha in a lightbox of our own; a type whose ficha has not
+     arrived yet says so in the same lightbox. The card's ficha image opens it
+     too. Click anywhere, the button or Escape to close. */
+  function closeLightbox() {
+    var lb = document.getElementById('aki-lightbox');
+    if (lb) lb.remove();
+    document.body.style.overflow = '';
+  }
+  function openLightbox(t) {
+    var lb = document.getElementById('aki-lightbox');
+    if (!lb) {
+      lb = document.createElement('div');
+      lb.id = 'aki-lightbox';
+      lb.style.cssText = 'position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.86);display:flex;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out';
+      var x = document.createElement('button');
+      x.type = 'button';
+      x.setAttribute('aria-label', 'Cerrar');
+      x.textContent = '×';
+      x.style.cssText = 'position:absolute;top:1rem;right:1rem;width:2.5rem;height:2.5rem;border-radius:9999px;border:0;background:#fff;color:#121212;font-size:1.4rem;line-height:1;cursor:pointer';
+      x.addEventListener('click', function (e) { e.stopPropagation(); closeLightbox(); });
+      var body = document.createElement('div');
+      body.id = 'aki-lightbox-body';
+      body.style.cssText = 'max-width:100%;max-height:100%;display:flex;align-items:center;justify-content:center';
+      lb.appendChild(x);
+      lb.appendChild(body);
+      lb.addEventListener('click', closeLightbox);
+      document.body.appendChild(lb);
+    }
+    var body = document.getElementById('aki-lightbox-body');
+    if (FICHA_BY_TYPE[t]) {
+      body.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = FICHA_BY_TYPE[t];
+      img.alt = 'Ficha técnica del Tipo ' + t;
+      img.style.cssText = 'max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;background:#fff';
+      body.appendChild(img);
+    } else {
+      body.innerHTML = '<p style="margin:0;max-width:34rem;padding:2.5rem 3rem;border-radius:16px;background:#fff;color:#121212;font-size:1rem;line-height:1.6;text-align:center">La ficha técnica de este tipo todavía no está disponible.</p>';
+    }
+    document.body.style.overflow = 'hidden';
+  }
+  document.addEventListener('click', function (e) {
+    var el = e.target;
+    var b = el && el.closest ? el.closest('#typology-cards-container button, #typology-cards-container img, [onclick*="openModalForTypology"]') : null;
+    if (!b) return;
+    // the buttons' own onclick opens the original modal, whose price spans the
+    // cleanup removes: it throws. Ours always wins, for every type.
+    e.preventDefault();
+    e.stopPropagation();
+    openLightbox(cardType(b.closest('#typology-cards-container > div')));
+  }, true);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
 })();
 </script>
 </body></html>
