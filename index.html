@@ -1832,6 +1832,18 @@
       d.textContent = 'Descargar brochure';
       c.appendChild(d);
     }
+    // the legal pages the repository already carries stay reachable
+    var foot = document.querySelector('footer');
+    if (foot && !document.getElementById('aki-legal')) {
+      var nav = document.createElement('nav');
+      nav.id = 'aki-legal';
+      nav.className = 'flex flex-wrap gap-6 text-xs text-white/60 mt-6';
+      nav.innerHTML = '<a class="hover:text-white" href="privacidad.html">Politica de privacidad</a>' +
+                      '<a class="hover:text-white" href="terminos.html">Terminos y condiciones</a>' +
+                      '<a class="hover:text-white" href="transparencia.html">Transparencia</a>' +
+                      '<a class="hover:text-white" href="video.html">Video</a>';
+      foot.appendChild(nav);
+    }
   }
   var t = 0;
   new MutationObserver(function () { clearTimeout(t); t = setTimeout(clean, 150); }).observe(document.documentElement, { subtree: true, childList: true });
