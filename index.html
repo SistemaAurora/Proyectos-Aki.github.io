@@ -644,38 +644,93 @@
     letter-spacing: 0.04em;
     color: #8c6b45;
   }
+  .aki-area-total {
+    margin: 0.6rem 0 0;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: #595c5d;
+  }
   #typology-cards-container h3 s { opacity: 0.45; }
 
-  /* the ficha lightbox: the sheet opens whole and centred, never cropped (the
-     client saw it oversized and cut off). The styles live here, not inline,
-     so the phone padding can adjust and the percentage limits resolve against
-     a definite box. */
+  /* the ficha lightbox: the sheet opens whole and centred, never cropped, with
+     its own little interface — title, sold state, arrows, WhatsApp, download.
+     The styles live here, not inline, so the phone padding can adjust and the
+     percentage limits resolve against a definite box. */
   #aki-lightbox {
     position: fixed; inset: 0; z-index: 999;
-    background: rgba(0, 0, 0, .86);
-    display: flex; align-items: center; justify-content: center;
-    padding: 2rem; cursor: zoom-out;
+    background: rgba(0, 0, 0, .88);
+    display: flex; flex-direction: column;
+    padding: 1rem 1.25rem 1.25rem;
     animation: aki-lb-fade 180ms ease-out;
   }
-  #aki-lightbox-body {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
+  .aki-lb-top { display: flex; align-items: center; gap: .5rem; padding-bottom: .8rem; }
+  .aki-lb-chip {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+    color: #faf8f5; background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 9999px; padding: .45em 1em; white-space: nowrap;
   }
-  #aki-lightbox img {
-    max-width: 100%; max-height: 100%; object-fit: contain;
-    border-radius: 12px; background: #fff;
-    animation: aki-lb-zoom 240ms cubic-bezier(0.32, 0.72, 0, 1);
+  .aki-lb-chip--state {
+    color: #d9c9a4; border-color: rgba(140, 107, 69, .8);
+    background: rgba(140, 107, 69, .2);
   }
-  #aki-lightbox .aki-lb-x {
-    position: absolute; top: 1rem; right: 1rem;
+  .aki-lb-chip[hidden], .aki-lb-btn[hidden] { display: none; }
+  .aki-lb-x {
+    margin-left: auto;
     width: 2.5rem; height: 2.5rem; border-radius: 9999px; border: 0;
     background: #fff; color: #121212; font-size: 1.4rem; line-height: 1;
     cursor: pointer; box-shadow: 0 2px 12px rgba(0, 0, 0, .35);
   }
+  #aki-lightbox-body {
+    flex: 1; min-height: 0;
+    display: flex; align-items: center; justify-content: center;
+    cursor: zoom-out;
+  }
+  #aki-lightbox img {
+    max-width: 100%; max-height: 100%; object-fit: contain;
+    border-radius: 12px; background: #fff;
+    cursor: default;
+    animation: aki-lb-zoom 240ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .aki-lb-note {
+    margin: 0; max-width: 34rem; padding: 2.5rem 3rem;
+    border-radius: 16px; background: #fff; color: #121212;
+    font-size: 1rem; line-height: 1.6; text-align: center;
+  }
+  .aki-lb-bar {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: .6rem; padding-top: .9rem;
+  }
+  .aki-lb-label {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: .8rem; letter-spacing: .04em; color: #faf8f5;
+    padding: 0 .5rem; max-width: 100%;
+  }
+  .aki-lb-nav {
+    width: 2.4rem; height: 2.4rem; border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .06);
+    color: #faf8f5; font-size: 1.3rem; line-height: 1; cursor: pointer;
+  }
+  .aki-lb-nav:hover { background: rgba(255, 255, 255, .16); }
+  .aki-lb-sep { width: 1px; height: 1.8rem; background: rgba(255, 255, 255, .22); margin: 0 .3rem; }
+  .aki-lb-btn {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+    text-decoration: none; border-radius: 9999px; padding: .8em 1.5em;
+    color: #faf8f5; border: 1px solid rgba(255, 255, 255, .35);
+    background: transparent; cursor: pointer;
+  }
+  .aki-lb-btn:hover { border-color: #faf8f5; }
+  .aki-lb-btn--wa { background: #8c6b45; border-color: #8c6b45; font-weight: 600; }
+  .aki-lb-btn--wa:hover { background: #a07a4e; border-color: #a07a4e; }
   @keyframes aki-lb-fade { from { opacity: 0; } to { opacity: 1; } }
   @keyframes aki-lb-zoom { from { transform: scale(0.96); opacity: 0.6; } to { transform: scale(1); opacity: 1; } }
   @media (max-width: 640px) {
-    #aki-lightbox { padding: 0.75rem; }
+    #aki-lightbox { padding: .6rem .6rem .9rem; }
+    .aki-lb-bar { gap: .45rem; }
+    .aki-lb-btn { padding: .7em 1.1em; }
+    .aki-lb-label { font-size: .72rem; }
   }
 </style>
 </head>
@@ -1958,6 +2013,17 @@
         h.parentElement.appendChild(note);
       }
     });
+    // the dúplex carry their area total as well, as the client asked
+    document.querySelectorAll('#typology-cards-container > div').forEach(function (card) {
+      var t = cardType(card);
+      if (!AREA_TOTAL[t] || card.querySelector('.aki-area-total')) return;
+      var h = card.querySelector('h3');
+      if (!h || !h.parentElement) return;
+      var total = document.createElement('p');
+      total.className = 'aki-area-total';
+      total.textContent = 'Área total: ' + AREA_TOTAL[t];
+      h.parentElement.appendChild(total);
+    });
     // the legal pages the repository already carries stay reachable
     var foot = document.querySelector('footer');
     if (foot && !document.getElementById('aki-legal')) {
@@ -1975,6 +2041,8 @@
   // and cardType must exist before the first clean() run
   var FICHA_BY_TYPE = {"2":"assets/ficha-tipo-2.webp","3":"assets/ficha-tipo-3.webp","5":"assets/ficha-tipo-5.webp","6":"assets/ficha-tipo-6.webp","7":"assets/ficha-tipo-7.webp"};
   var SOLD = {"units":{"1":["101"],"2":["102"],"3":["201","301","401"],"4":["202","302","402","502"],"5":["203","303","403"],"6":["501"],"7":["503"]},"sold":{"1":["101"],"5":["303","403"]}};
+  var AREA_TOTAL = {"6":"225.41 m²","7":"218 m²"};
+  var TIPOS = {"1":{"label":"Tipo 1 · Dpto 101","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Dpto%20101%20%28Tipo%201%29%20del%20Edificio%20AKI."},"2":{"label":"Tipo 2 · Dpto 102","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Dpto%20102%20%28Tipo%202%29%20del%20Edificio%20AKI."},"3":{"label":"Tipo 3 · Dptos 201 · 301 · 401","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Tipo%203%20%2870m2%29%20del%20Edificio%20AKI."},"4":{"label":"Tipo 4 · Dptos 202 · 302 · 402 · 502","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Tipo%204%20%2832m2%29%20del%20Edificio%20AKI."},"5":{"label":"Tipo 5 · Dptos 203 · 303 · 403","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Tipo%205%20%2855m2%29%20del%20Edificio%20AKI."},"6":{"label":"Tipo 6 · Dúplex Penthouse 501","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Duplex%20501%20del%20Edificio%20AKI."},"7":{"label":"Tipo 7 · Dúplex Penthouse 503","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Duplex%20503%20del%20Edificio%20AKI."}};
   function cardType(el) {
     var m = ((el && el.textContent) || '').match(/Tipo\s*([1-7])/i);
     return m ? +m[1] : 0;
@@ -1989,16 +2057,63 @@
      client's own ficha in a lightbox of our own; a type whose ficha has not
      arrived yet says so in the same lightbox. The card's ficha image opens it
      too. Click anywhere, the button or Escape to close. */
+  // ---------- the lightbox: the sheet, its interface and its buttons ----------
+  var lbType = 0;
   var lbTrigger = null;
+  function typeLabel(t) {
+    return (TIPOS[t] && TIPOS[t].label) || ('Tipo ' + t);
+  }
+  function typeWa(t) {
+    return (TIPOS[t] && TIPOS[t].wa) ||
+      ('https://wa.me/51915214505?text=' + encodeURIComponent('Hola, quiero información del Edificio AKI: ' + typeLabel(t) + '.'));
+  }
+  function soldChipText(t) {
+    var units = SOLD.units[t] || [];
+    var sold = SOLD.sold[t] || [];
+    if (!sold.length) return '';
+    if (units.length && sold.length >= units.length) return 'Vendido';
+    return 'Vendidos: ' + sold.join(' y ');
+  }
   function closeLightbox() {
     var lb = document.getElementById('aki-lightbox');
     if (lb) lb.remove();
     document.body.style.overflow = '';
     if (lbTrigger && lbTrigger.focus) lbTrigger.focus();
     lbTrigger = null;
+    lbType = 0;
+  }
+  function renderLightbox() {
+    var lb = document.getElementById('aki-lightbox');
+    if (!lb) return;
+    var t = lbType;
+    document.getElementById('aki-lb-title').textContent = 'Ficha técnica · Tipo ' + t;
+    var state = document.getElementById('aki-lb-state');
+    state.textContent = soldChipText(t);
+    state.hidden = !state.textContent;
+    document.getElementById('aki-lb-label').textContent = typeLabel(t);
+    var body = document.getElementById('aki-lightbox-body');
+    if (FICHA_BY_TYPE[t]) {
+      body.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = FICHA_BY_TYPE[t];
+      img.alt = 'Ficha técnica del ' + typeLabel(t);
+      body.appendChild(img);
+    } else {
+      body.innerHTML = '<p class="aki-lb-note">La ficha técnica de este tipo todavía no está disponible. Escríbenos por WhatsApp y te la enviamos.</p>';
+    }
+    var dl = document.getElementById('aki-lb-download');
+    if (FICHA_BY_TYPE[t]) {
+      dl.href = FICHA_BY_TYPE[t];
+      dl.setAttribute('download', 'Ficha-' + typeLabel(t).replace(/[^a-zA-Z0-9]+/g, '-') + '.webp');
+      dl.hidden = false;
+    } else {
+      dl.hidden = true;
+    }
+    document.getElementById('aki-lb-wa').href = typeWa(t);
   }
   function openLightbox(t, trigger) {
     lbTrigger = trigger || null;
+    lbType = t || 0;
     var lb = document.getElementById('aki-lightbox');
     if (!lb) {
       lb = document.createElement('div');
@@ -2006,32 +2121,35 @@
       lb.setAttribute('role', 'dialog');
       lb.setAttribute('aria-modal', 'true');
       lb.setAttribute('aria-label', 'Ficha técnica ampliada');
-      var x = document.createElement('button');
-      x.type = 'button';
-      x.className = 'aki-lb-x';
-      x.setAttribute('aria-label', 'Cerrar');
-      x.textContent = '×';
-      x.addEventListener('click', function (e) { e.stopPropagation(); closeLightbox(); });
-      var body = document.createElement('div');
-      body.id = 'aki-lightbox-body';
-      lb.appendChild(x);
-      lb.appendChild(body);
-      lb.addEventListener('click', closeLightbox);
+      lb.innerHTML =
+        '<div class="aki-lb-top">' +
+          '<span class="aki-lb-chip" id="aki-lb-title"></span>' +
+          '<span class="aki-lb-chip aki-lb-chip--state" id="aki-lb-state" hidden></span>' +
+          '<button type="button" class="aki-lb-x" aria-label="Cerrar">×</button>' +
+        '</div>' +
+        '<div id="aki-lightbox-body"></div>' +
+        '<div class="aki-lb-bar">' +
+          '<button type="button" class="aki-lb-nav" id="aki-lb-prev" aria-label="Tipo anterior">‹</button>' +
+          '<span class="aki-lb-label" id="aki-lb-label"></span>' +
+          '<button type="button" class="aki-lb-nav" id="aki-lb-next" aria-label="Tipo siguiente">›</button>' +
+          '<span class="aki-lb-sep" aria-hidden="true"></span>' +
+          '<a class="aki-lb-btn aki-lb-btn--wa" id="aki-lb-wa" target="_blank" rel="noopener">Consultar por WhatsApp</a>' +
+          '<a class="aki-lb-btn" id="aki-lb-download" download>Descargar ficha</a>' +
+        '</div>';
+      // append first: the ids only resolve once the dialog is in the document
       document.body.appendChild(lb);
+      lb.querySelector('.aki-lb-x').addEventListener('click', function (e) { e.stopPropagation(); closeLightbox(); });
+      lb.querySelector('#aki-lb-prev').addEventListener('click', function () { lbType = (lbType + 5) % 7 + 1; renderLightbox(); });
+      lb.querySelector('#aki-lb-next').addEventListener('click', function () { lbType = lbType % 7 + 1; renderLightbox(); });
+      // a click on the dark ground (not on the sheet or the bars) closes
+      lb.addEventListener('click', function (e) {
+        if (e.target === lb || e.target.id === 'aki-lightbox-body') closeLightbox();
+      });
     }
-    var body = document.getElementById('aki-lightbox-body');
-    if (FICHA_BY_TYPE[t]) {
-      body.innerHTML = '';
-      var img = document.createElement('img');
-      img.src = FICHA_BY_TYPE[t];
-      img.alt = 'Ficha técnica del Tipo ' + t;
-      body.appendChild(img);
-    } else {
-      body.innerHTML = '<p style="margin:0;max-width:34rem;padding:2.5rem 3rem;border-radius:16px;background:#fff;color:#121212;font-size:1rem;line-height:1.6;text-align:center">La ficha técnica de este tipo todavía no está disponible.</p>';
-    }
+    renderLightbox();
     document.body.style.overflow = 'hidden';
-    var closeBtn = lb.querySelector('button');
-    if (closeBtn) closeBtn.focus();
+    var x = lb.querySelector('.aki-lb-x');
+    if (x) x.focus();
   }
   document.addEventListener('click', function (e) {
     var el = e.target;
@@ -2044,7 +2162,11 @@
     openLightbox(cardType(b.closest('#typology-cards-container > div')), b);
   }, true);
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeLightbox();
+    var lb = document.getElementById('aki-lightbox');
+    if (e.key === 'Escape') { closeLightbox(); return; }
+    if (!lb) return;
+    if (e.key === 'ArrowRight') { lbType = lbType % 7 + 1; renderLightbox(); }
+    if (e.key === 'ArrowLeft') { lbType = (lbType + 5) % 7 + 1; renderLightbox(); }
   });
 })();
 </script>
