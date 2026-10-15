@@ -637,15 +637,15 @@
   }
   .aki-sold-stamp span {
     transform: rotate(-14deg);
-    padding: 0.45em 0.9em;
-    border: 3px solid rgba(179, 38, 30, 0.9);
+    padding: 0.5em 0.95em;
+    border: 4px solid rgba(211, 47, 47, 0.95);
     border-radius: 0.2em;
-    background: rgba(250, 248, 245, 0.82);
-    color: #b3261e;
+    background: rgba(250, 248, 245, 0.9);
+    color: #d32f2f;
     font-family: "Space Grotesk", system-ui, sans-serif;
-    font-size: clamp(26px, 3.2vw, 40px);
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-size: clamp(30px, 3.6vw, 46px);
+    font-weight: 800;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     line-height: 1;
   }
@@ -836,7 +836,7 @@
 <!-- Profile Segment Tabs -->
 <div class="flex flex-wrap gap-2 p-1.5 bg-surface-container rounded-full border border-outline-variant/60">
 <button class="px-4 py-2 rounded-full font-label-technical text-xs tracking-wider uppercase transition-all bg-primary text-white shadow-sm" id="btn-prof-all" onclick="filterByProfile('all')">
-        Todos (7)
+        Todos (8)
       </button>
 <button class="px-4 py-2 rounded-full font-label-technical text-xs tracking-wider uppercase transition-all text-on-surface-variant hover:text-primary" id="btn-prof-inversion" onclick="filterByProfile('inversion')">
         Inversionista / Renta
@@ -1368,6 +1368,21 @@
       cuotaEst: "S/ 3,350 / mes",
       ambientes: "Primer nivel: Sala comedor, cocina, 1 dormitorio, 1 baño. Segundo nivel: 1 dormitorio suite, baño privado, sala de estar, lavandería y 2 amplios patios/terrazas.",
       waLink: "https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Duplex%20503%20del%20Edificio%20AKI."
+    },
+    {
+      id: 7,
+      code: "Dpto 103",
+      profile: "jovenes",
+      profileLabel: "Jóvenes & Parejas",
+      view: "Vista interior con patio",
+      level: "Piso 1",
+      areaTechada: "56.67 m²",
+      areaOcupada: "73.99 m²",
+      dormitorios: "1 Dormitorio + Closet",
+      precioEst: "",
+      cuotaEst: "cuota",
+      ambientes: "Estar · Kitchenet · Baño · Dormitorio con closet · Escritorio · Lavandería · Patio",
+      waLink: "https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Dpto%20103%20del%20Edificio%20AKI."
     }
   ];
 
@@ -1983,6 +1998,10 @@
     document.querySelectorAll('#tech-modal a, #tech-modal button').forEach(function (el) {
       if (/dosier|dossier|descargar/i.test(el.textContent || '')) el.remove();
     });
+    // rows the price pass left empty (the new unit carries no cuota) go too
+    document.querySelectorAll('#typology-cards-container > div div').forEach(function (el) {
+      if (!el.children.length && !(el.textContent || '').trim()) el.remove();
+    });
     // each card carries its own ficha at the top; a type without one stays clean
     document.querySelectorAll('#typology-cards-container > div').forEach(function (card) {
       if (card.querySelector('img')) return;
@@ -2054,12 +2073,15 @@
   // the ficha map is derived from the ficha list in the build script; both it
   // and cardType must exist before the first clean() run
   var FICHA_BY_TYPE = {"2":"assets/ficha-tipo-2.webp","3":"assets/ficha-tipo-3.webp","4":"assets/ficha-tipo-4.webp","5":"assets/ficha-tipo-5.webp","6":"assets/ficha-tipo-6.webp","7":"assets/ficha-tipo-7.webp"};
-  var SOLD = {"units":{"1":["101"],"2":["102"],"3":["201","301","401"],"4":["202","302","402","502"],"5":["203","303","403"],"6":["501"],"7":["503"]},"sold":{"1":["101"],"5":["303","403"]}};
+  var SOLD = {"units":{"1":["101"],"2":["102"],"3":["201","301","401"],"4":["202","302","402","502"],"5":["203","303","403"],"6":["501"],"7":["503"],"8":["103"]},"sold":{"1":["101"],"5":["303","403"],"8":["103"]}};
   var AREA_TOTAL = {"6":"Techada total 102.08 m² · Ocupada total 123.33 m²","7":"Techada total 84 m² · Ocupada total 134 m²"};
-  var TIPOS = {"1":{"label":"Tipo 1 · Dpto 101","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Dpto%20101%20%28Tipo%201%29%20del%20Edificio%20AKI."},"2":{"label":"Tipo 2 · Dpto 102","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Dpto%20102%20%28Tipo%202%29%20del%20Edificio%20AKI."},"3":{"label":"Tipo 3 · Dptos 201 · 301 · 401","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Tipo%203%20%2870m2%29%20del%20Edificio%20AKI."},"4":{"label":"Tipo 4 · Dptos 202 · 302 · 402 · 502","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Tipo%204%20%2832m2%29%20del%20Edificio%20AKI."},"5":{"label":"Tipo 5 · Dptos 203 · 303 · 403","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Tipo%205%20%2855m2%29%20del%20Edificio%20AKI."},"6":{"label":"Tipo 6 · Dúplex Penthouse 501","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Duplex%20501%20del%20Edificio%20AKI."},"7":{"label":"Tipo 7 · Dúplex Penthouse 503","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Duplex%20503%20del%20Edificio%20AKI."}};
+  var TIPOS = {"1":{"label":"Tipo 1 · Dpto 101","short":"Tipo 1","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Dpto%20101%20%28Tipo%201%29%20del%20Edificio%20AKI."},"2":{"label":"Tipo 2 · Dpto 102","short":"Tipo 2","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Dpto%20102%20%28Tipo%202%29%20del%20Edificio%20AKI."},"3":{"label":"Tipo 3 · Dptos 201 · 301 · 401","short":"Tipo 3","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Tipo%203%20%2870m2%29%20del%20Edificio%20AKI."},"4":{"label":"Tipo 4 · Dptos 202 · 302 · 402 · 502","short":"Tipo 4","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Tipo%204%20%2832m2%29%20del%20Edificio%20AKI."},"5":{"label":"Tipo 5 · Dptos 203 · 303 · 403","short":"Tipo 5","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Tipo%205%20%2855m2%29%20del%20Edificio%20AKI."},"6":{"label":"Tipo 6 · Dúplex Penthouse 501","short":"Tipo 6","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Duplex%20501%20del%20Edificio%20AKI."},"7":{"label":"Tipo 7 · Dúplex Penthouse 503","short":"Tipo 7","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Duplex%20503%20del%20Edificio%20AKI."},"8":{"label":"Dpto 103","short":"Dpto 103","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Dpto%20103%20del%20Edificio%20AKI."}};
   function cardType(el) {
-    var m = ((el && el.textContent) || '').match(/Tipo\s*([1-7])/i);
-    return m ? +m[1] : 0;
+    var txt = (el && el.textContent) || '';
+    var m = txt.match(/Tipo\s*([1-7])/i);
+    if (m) return +m[1];
+    if (/Dpto\s*103/i.test(txt)) return 8;
+    return 0;
   }
   var t = 0;
   new MutationObserver(function () { clearTimeout(t); t = setTimeout(clean, 150); }).observe(document.documentElement, { subtree: true, childList: true });
@@ -2100,7 +2122,7 @@
     var lb = document.getElementById('aki-lightbox');
     if (!lb) return;
     var t = lbType;
-    document.getElementById('aki-lb-title').textContent = 'Ficha técnica · Tipo ' + t;
+    document.getElementById('aki-lb-title').textContent = 'Ficha técnica · ' + ((TIPOS[t] && TIPOS[t].short) || ('Tipo ' + t));
     var state = document.getElementById('aki-lb-state');
     state.textContent = soldChipText(t);
     state.hidden = !state.textContent;
