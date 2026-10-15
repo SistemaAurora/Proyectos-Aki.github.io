@@ -615,6 +615,36 @@
   }
 
   .hero-marks { display: none; }
+
+  /* the client asked for the sold units to keep their description with
+     VENDIDO over them: a diagonal stamp on a fully sold type, struck numbers
+     and a note on a type with only some units sold */
+  .aki-sold-stamp {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none; z-index: 3;
+  }
+  .aki-sold-stamp span {
+    transform: rotate(-14deg);
+    padding: 0.45em 0.9em;
+    border: 3px solid rgba(140, 107, 69, 0.9);
+    border-radius: 0.2em;
+    background: rgba(250, 248, 245, 0.82);
+    color: #8c6b45;
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: clamp(26px, 3.2vw, 40px);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .aki-sold-note {
+    margin: 0.9rem 0 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: #8c6b45;
+  }
+  #typology-cards-container h3 s { opacity: 0.45; }
 </style>
 </head>
 <body class="bg-background text-on-surface antialiased selection:bg-secondary selection:text-white">
@@ -678,7 +708,7 @@
         <span class="font-label-technical text-[10px] text-secondary uppercase tracking-widest">El edificio</span>
         <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-4xl text-surface font-medium mt-2">El edificio y su entorno</h2>
       </div>
-      <p class="font-body-md text-white/60 max-w-md">Cinco pisos, siete tipologías de 30 a 70 m², ascensor directo y acabados pensados para durar. En Jr. Prolongación Cuzco 1286, San Miguel.</p>
+      <p class="font-body-md text-white/60 max-w-md">Cinco pisos, siete tipologías de 30 a 134 m², ascensor directo y acabados pensados para durar. En Jr. Prolongación Cuzco 1286, San Miguel.</p>
     </div>
     <figure class="m-0">
       <video class="w-full aspect-video rounded-2xl border border-white/15 shadow-2xl bg-neutral-950" src="assets/aereo.mp4" poster="assets/ubicacion.webp" muted loop playsinline autoplay preload="metadata" aria-label="El Edificio AKI y su entorno, en San Miguel."></video>
@@ -1735,7 +1765,7 @@
    real assets that live in this project, by context, with a catch-all so
    nothing is left pointing outside. */
 (function () {
-  var FICHAS = {"2":"assets/ficha-tipo-2.webp","3":"assets/ficha-tipo-3.webp","6":"assets/ficha-tipo-6.webp","7":"assets/ficha-tipo-7.webp"};
+  var FICHAS = {"2":"assets/ficha-tipo-2.webp","3":"assets/ficha-tipo-3.webp","5":"assets/ficha-tipo-5.webp","6":"assets/ficha-tipo-6.webp","7":"assets/ficha-tipo-7.webp"};
   var RENDERS = ['assets/interior-cocina.webp','assets/gal-07.webp','assets/gal-05.webp','assets/ubicacion.webp'];
   var FALLBACK = 'assets/ubicacion.webp';
 
@@ -1858,6 +1888,44 @@
       img.className = 'w-full rounded-xl border border-outline-variant mb-4 bg-white cursor-zoom-in';
       card.insertBefore(img, card.firstChild);
     });
+    // the sold units: a type sold out gets the diagonal stamp; a type with
+    // some units sold keeps its description and gets those numbers struck
+    // through, with a note saying which unit is still available
+    document.querySelectorAll('#typology-cards-container > div').forEach(function (card) {
+      var t = cardType(card);
+      var units = SOLD.units[t] || [];
+      var sold = SOLD.sold[t] || [];
+      if (!sold.length) return;
+      if (units.length && sold.length >= units.length) {
+        if (!card.querySelector('.aki-sold-stamp')) {
+          card.style.position = 'relative';
+          var stamp = document.createElement('div');
+          stamp.className = 'aki-sold-stamp';
+          stamp.innerHTML = '<span>Vendido</span>';
+          card.appendChild(stamp);
+        }
+        return;
+      }
+      var h = card.querySelector('h3');
+      if (h && !h.dataset.akiSold) {
+        h.dataset.akiSold = '1';
+        var html = '';
+        h.textContent.split(/(\d{3})/).forEach(function (part) {
+          if (sold.indexOf(part) !== -1) html += '<s>' + part + '</s>';
+          else html += part.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+        });
+        h.innerHTML = html;
+      }
+      // the note goes into the card's text block (the h3's parent), never into
+      // the ficha image: an <img> accepts children but never renders them
+      if (h && h.parentElement && !card.querySelector('.aki-sold-note')) {
+        var left = units.filter(function (u) { return sold.indexOf(u) === -1; });
+        var note = document.createElement('p');
+        note.className = 'aki-sold-note';
+        note.textContent = 'Vendidos: ' + sold.join(' y ') + (left.length ? ' · Disponible: ' + left.join(', ') : '');
+        h.parentElement.appendChild(note);
+      }
+    });
     // the legal pages the repository already carries stay reachable
     var foot = document.querySelector('footer');
     if (foot && !document.getElementById('aki-legal')) {
@@ -1873,7 +1941,8 @@
   }
   // the ficha map is derived from the ficha list in the build script; both it
   // and cardType must exist before the first clean() run
-  var FICHA_BY_TYPE = {"2":"assets/ficha-tipo-2.webp","3":"assets/ficha-tipo-3.webp","6":"assets/ficha-tipo-6.webp","7":"assets/ficha-tipo-7.webp"};
+  var FICHA_BY_TYPE = {"2":"assets/ficha-tipo-2.webp","3":"assets/ficha-tipo-3.webp","5":"assets/ficha-tipo-5.webp","6":"assets/ficha-tipo-6.webp","7":"assets/ficha-tipo-7.webp"};
+  var SOLD = {"units":{"1":["101"],"2":["102"],"3":["201","301","401"],"4":["202","302","402","502"],"5":["203","303","403"],"6":["501"],"7":["503"]},"sold":{"1":["101"],"5":["303","403"]}};
   function cardType(el) {
     var m = ((el && el.textContent) || '').match(/Tipo\s*([1-7])/i);
     return m ? +m[1] : 0;
