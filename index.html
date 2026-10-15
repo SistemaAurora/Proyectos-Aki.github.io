@@ -645,6 +645,38 @@
     color: #8c6b45;
   }
   #typology-cards-container h3 s { opacity: 0.45; }
+
+  /* the ficha lightbox: the sheet opens whole and centred, never cropped (the
+     client saw it oversized and cut off). The styles live here, not inline,
+     so the phone padding can adjust and the percentage limits resolve against
+     a definite box. */
+  #aki-lightbox {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(0, 0, 0, .86);
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem; cursor: zoom-out;
+    animation: aki-lb-fade 180ms ease-out;
+  }
+  #aki-lightbox-body {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #aki-lightbox img {
+    max-width: 100%; max-height: 100%; object-fit: contain;
+    border-radius: 12px; background: #fff;
+    animation: aki-lb-zoom 240ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  #aki-lightbox .aki-lb-x {
+    position: absolute; top: 1rem; right: 1rem;
+    width: 2.5rem; height: 2.5rem; border-radius: 9999px; border: 0;
+    background: #fff; color: #121212; font-size: 1.4rem; line-height: 1;
+    cursor: pointer; box-shadow: 0 2px 12px rgba(0, 0, 0, .35);
+  }
+  @keyframes aki-lb-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes aki-lb-zoom { from { transform: scale(0.96); opacity: 0.6; } to { transform: scale(1); opacity: 1; } }
+  @media (max-width: 640px) {
+    #aki-lightbox { padding: 0.75rem; }
+  }
 </style>
 </head>
 <body class="bg-background text-on-surface antialiased selection:bg-secondary selection:text-white">
@@ -712,7 +744,7 @@
     </div>
     <figure class="m-0">
       <video class="w-full aspect-video rounded-2xl border border-white/15 shadow-2xl bg-neutral-950" src="assets/aereo.mp4" poster="assets/ubicacion.webp" muted loop playsinline autoplay preload="metadata" aria-label="El Edificio AKI y su entorno, en San Miguel."></video>
-      <figcaption class="mt-3 text-xs font-body-sm text-white/60">Vista aérea del edificio y las calles que lo rodean.</figcaption>
+      <figcaption class="mt-3 text-xs font-body-sm text-white/60">Video referencial.</figcaption>
     </figure>
   </div>
 </section>
@@ -1239,8 +1271,8 @@
       profileLabel: "Familias & Dúplex",
       view: "Vista exterior panorámica",
       level: "Piso 5 + Azotea",
-      areaTechada: "69.26 m² / 32.82 m²",
-      areaOcupada: "69.26 m² / 54.07 m²",
+      areaTechada: "102.08 m²",
+      areaOcupada: "123.33 m²",
       dormitorios: "3 Dormitorios · Dúplex",
       precioEst: "$158,000 USD",
       cuotaEst: "S/ 3,700 / mes",
@@ -1254,8 +1286,8 @@
       profileLabel: "Familias & Dúplex",
       view: "Vista interior con dobles patios",
       level: "Piso 5 + Azotea",
-      areaTechada: "53.74 m² / 30.02 m²",
-      areaOcupada: "53.74 m² / 80.15 m²",
+      areaTechada: "84 m²",
+      areaOcupada: "134 m²",
       dormitorios: "2 Dormitorios · Dúplex",
       precioEst: "$142,000 USD",
       cuotaEst: "S/ 3,350 / mes",
@@ -1957,26 +1989,31 @@
      client's own ficha in a lightbox of our own; a type whose ficha has not
      arrived yet says so in the same lightbox. The card's ficha image opens it
      too. Click anywhere, the button or Escape to close. */
+  var lbTrigger = null;
   function closeLightbox() {
     var lb = document.getElementById('aki-lightbox');
     if (lb) lb.remove();
     document.body.style.overflow = '';
+    if (lbTrigger && lbTrigger.focus) lbTrigger.focus();
+    lbTrigger = null;
   }
-  function openLightbox(t) {
+  function openLightbox(t, trigger) {
+    lbTrigger = trigger || null;
     var lb = document.getElementById('aki-lightbox');
     if (!lb) {
       lb = document.createElement('div');
       lb.id = 'aki-lightbox';
-      lb.style.cssText = 'position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.86);display:flex;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out';
+      lb.setAttribute('role', 'dialog');
+      lb.setAttribute('aria-modal', 'true');
+      lb.setAttribute('aria-label', 'Ficha técnica ampliada');
       var x = document.createElement('button');
       x.type = 'button';
+      x.className = 'aki-lb-x';
       x.setAttribute('aria-label', 'Cerrar');
       x.textContent = '×';
-      x.style.cssText = 'position:absolute;top:1rem;right:1rem;width:2.5rem;height:2.5rem;border-radius:9999px;border:0;background:#fff;color:#121212;font-size:1.4rem;line-height:1;cursor:pointer';
       x.addEventListener('click', function (e) { e.stopPropagation(); closeLightbox(); });
       var body = document.createElement('div');
       body.id = 'aki-lightbox-body';
-      body.style.cssText = 'max-width:100%;max-height:100%;display:flex;align-items:center;justify-content:center';
       lb.appendChild(x);
       lb.appendChild(body);
       lb.addEventListener('click', closeLightbox);
@@ -1988,12 +2025,13 @@
       var img = document.createElement('img');
       img.src = FICHA_BY_TYPE[t];
       img.alt = 'Ficha técnica del Tipo ' + t;
-      img.style.cssText = 'max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;background:#fff';
       body.appendChild(img);
     } else {
       body.innerHTML = '<p style="margin:0;max-width:34rem;padding:2.5rem 3rem;border-radius:16px;background:#fff;color:#121212;font-size:1rem;line-height:1.6;text-align:center">La ficha técnica de este tipo todavía no está disponible.</p>';
     }
     document.body.style.overflow = 'hidden';
+    var closeBtn = lb.querySelector('button');
+    if (closeBtn) closeBtn.focus();
   }
   document.addEventListener('click', function (e) {
     var el = e.target;
@@ -2003,7 +2041,7 @@
     // cleanup removes: it throws. Ours always wins, for every type.
     e.preventDefault();
     e.stopPropagation();
-    openLightbox(cardType(b.closest('#typology-cards-container > div')));
+    openLightbox(cardType(b.closest('#typology-cards-container > div')), b);
   }, true);
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeLightbox();
