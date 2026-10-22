@@ -2212,4 +2212,72 @@
   });
 })();
 </script>
+
+<script>
+/* The contact block, as the client asked:
+   - the email field and its label go
+   - "Solicitar Dossier" reads "Solicitar Brochure"
+   - the form's own button reads "Descargar Brochure" and really downloads the
+     brochure, then opens the WhatsApp chat with the answers
+   - the extra standalone download button is removed (one button does it all) */
+(function () {
+  function fix() {
+    var c = document.getElementById('contacto');
+    if (!c) return;
+    // 1 · no email field, no label left behind
+    var email = c.querySelector('input[type="email"]');
+    if (email) {
+      var wrap = email.closest('div');
+      (wrap && wrap.parentElement ? wrap.parentElement : c).removeChild(wrap || email);
+    }
+    c.querySelectorAll('label, span, p, div').forEach(function (el) {
+      if (!el.children.length && /^\s*correo\s+electr/i.test(el.textContent || '')) el.remove();
+    });
+    // 2 · the wording
+    c.querySelectorAll('*').forEach(function (el) {
+      if (el.children.length) return;
+      if (/solicitar\s+dossier/i.test(el.textContent || '')) {
+        el.textContent = (el.textContent || '').replace(/solicitar\s+dossier(\s*&\s*precios)?/i, 'Solicitar Brochure');
+      }
+    });
+    // 3 · one button: downloads the brochure, then opens the chat
+    var btn = c.querySelector('button');
+    if (btn && !btn.dataset.akiWired) {
+      btn.dataset.akiWired = '1';
+      btn.textContent = 'Descargar Brochure';
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var a = document.createElement('a');
+        a.href = 'brochure-aki.pdf';
+        a.setAttribute('download', 'Brochure-Edificio-AKI.pdf');
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        var parts = [];
+        try {
+          // the fields carry no name attribute, so they are read by position
+          var etiquetas = ['nombre', 'telefono', 'interes', 'mensaje'];
+          var campos = (btn.closest('form') || c).querySelectorAll('input, textarea, select');
+          Array.prototype.forEach.call(campos, function (inp, i) {
+            var v = (inp.value || '').trim();
+            if (v) parts.push((etiquetas[i] || 'dato') + ': ' + v);
+          });
+        } catch (err) {}
+        var msg = 'Hola, quiero informacion del Edificio AKI.' + (parts.length ? ' ' + parts.join(' | ') : '');
+        setTimeout(function () {
+          window.open('https://wa.me/51915214505?text=' + encodeURIComponent(msg), '_blank');
+        }, 700);
+      }, true);
+    }
+    // 4 · the standalone button I had added goes
+    var solo = document.getElementById('aki-dossier');
+    if (solo) solo.remove();
+  }
+  var t = 0;
+  new MutationObserver(function () { clearTimeout(t); t = setTimeout(fix, 160); }).observe(document.documentElement, { subtree: true, childList: true });
+  window.addEventListener('load', fix);
+  fix();
+})();
+</script>
 </body></html>
