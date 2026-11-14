@@ -2402,23 +2402,18 @@
     display: grid; place-items: center; text-align: center;
     pointer-events: none; padding: 0 6vw; transition: opacity 0.6s ease;
   }
-  .aki-hint::before {
-    content: ""; position: absolute; inset: 0;
-    background: radial-gradient(58% 42% at 50% 52%,
-      rgba(10, 10, 10, 0.55) 0%, rgba(10, 10, 10, 0.22) 48%, transparent 76%);
-  }
-  .aki-hint > div { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.9rem; }
+  .aki-hint > div { position: relative; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
   .aki-hint__big {
-    margin: 0; color: #fff;
+    margin: 0; color: #c9a86a;
     font-family: var(--sc-font-display, "Space Grotesk", system-ui, sans-serif);
-    font-weight: 500; line-height: 1.04; letter-spacing: -0.03em;
+    font-weight: 500; line-height: 1.04; letter-spacing: -0.02em;
     font-size: clamp(1.9rem, 4.8vw, 3.8rem);
-    text-wrap: balance; text-shadow: 0 2px 30px rgba(0, 0, 0, 0.45);
+    text-wrap: balance;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 2px 28px rgba(0, 0, 0, 0.45);
   }
-  .aki-hint__sub { margin: 0; color: rgba(255, 255, 255, 0.85); font-size: clamp(0.95rem, 1.5vw, 1.2rem); }
   .aki-hint__arrow {
     width: 1px; height: clamp(26px, 4.5vh, 48px);
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+    background: linear-gradient(to bottom, rgba(201, 168, 106, 0.9), rgba(201, 168, 106, 0));
     animation: aki-hint-drop 2s ease-in-out infinite;
   }
   @keyframes aki-hint-drop {
@@ -2504,8 +2499,26 @@
     document.documentElement.style.overflow = 'hidden';
     var first = box.querySelector('video');
     if (first) {
-      var pr = first.play();
-      if (pr && pr.catch) pr.catch(function () { first.muted = true; var p2 = first.play(); if (p2 && p2.catch) p2.catch(function () {}); });
+      // El navegador frena el autoplay con sonido, y el video quedaba en su
+      // póster. Arranca silenciado (eso siempre se permite) y apenas empieza a
+      // correr se intenta devolver el sonido; si el navegador lo rechaza, queda
+      // con controles para que el visitante lo suba.
+      first.muted = true;
+      var go = function () {
+        var pr = first.play();
+        if (pr && pr.then) {
+          pr.then(function () {
+            first.removeAttribute('poster');
+            try { first.muted = false; } catch (e) {}
+          }).catch(function () {
+            first.muted = true;
+            var p2 = first.play();
+            if (p2 && p2.catch) p2.catch(function () {});
+          });
+        }
+      };
+      if (first.readyState >= 2) go();
+      else first.addEventListener('loadeddata', go, { once: true });
     }
   }
 
@@ -2539,7 +2552,6 @@
     h.dataset.aki = '1';
     h.innerHTML = '<div>' +
       '<p class="aki-hint__big">Desliza y mira el cielo cambiar</p>' +
-      '<p class="aki-hint__sub">El edificio, del atardecer a la noche</p>' +
       '<span class="aki-hint__arrow"></span></div>';
   }
 
