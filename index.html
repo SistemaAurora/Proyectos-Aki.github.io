@@ -2073,7 +2073,7 @@
   // the ficha map is derived from the ficha list in the build script; both it
   // and cardType must exist before the first clean() run
   var FICHA_BY_TYPE = {"2":"assets/ficha-tipo-2.webp","3":"assets/ficha-tipo-3.webp","4":"assets/ficha-tipo-4.webp","5":"assets/ficha-tipo-5.webp","6":"assets/ficha-tipo-6.webp","7":"assets/ficha-tipo-7.webp"};
-  var SOLD = {"units":{"1":["101"],"2":["102"],"3":["201","301","401"],"4":["202","302","402","502"],"5":["203","303","403"],"6":["501"],"7":["503"],"8":["103"]},"sold":{"1":["101"],"5":["303","403"],"8":["103"]}};
+  var SOLD = {"units":{"1":["101"],"2":["102"],"3":["201","301","401"],"4":["202","302","402","502"],"5":["203","303","403"],"6":["501"],"7":["503"],"8":["103"]},"sold":{"1":["101"],"2":["102"],"5":["303","403"],"8":["103"]}};
   var AREA_TOTAL = {"6":"Techada total 102.08 m² · Ocupada total 123.33 m²","7":"Techada total 84 m² · Ocupada total 134 m²"};
   var TIPOS = {"1":{"label":"Tipo 1 · Dpto 101","short":"Tipo 1","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Dpto%20101%20%28Tipo%201%29%20del%20Edificio%20AKI."},"2":{"label":"Tipo 2 · Dpto 102","short":"Tipo 2","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Dpto%20102%20%28Tipo%202%29%20del%20Edificio%20AKI."},"3":{"label":"Tipo 3 · Dptos 201 · 301 · 401","short":"Tipo 3","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Tipo%203%20%2870m2%29%20del%20Edificio%20AKI."},"4":{"label":"Tipo 4 · Dptos 202 · 302 · 402 · 502","short":"Tipo 4","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Tipo%204%20%2832m2%29%20del%20Edificio%20AKI."},"5":{"label":"Tipo 5 · Dptos 203 · 303 · 403","short":"Tipo 5","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Tipo%205%20%2855m2%29%20del%20Edificio%20AKI."},"6":{"label":"Tipo 6 · Dúplex Penthouse 501","short":"Tipo 6","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Duplex%20501%20del%20Edificio%20AKI."},"7":{"label":"Tipo 7 · Dúplex Penthouse 503","short":"Tipo 7","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Duplex%20503%20del%20Edificio%20AKI."},"8":{"label":"Dpto 103","short":"Dpto 103","wa":"https://wa.me/51915214505?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Dpto%20103%20del%20Edificio%20AKI."}};
   function cardType(el) {
@@ -2278,6 +2278,119 @@
   new MutationObserver(function () { clearTimeout(t); t = setTimeout(fix, 160); }).observe(document.documentElement, { subtree: true, childList: true });
   window.addEventListener('load', fix);
   fix();
+})();
+</script>
+
+<script>
+/* Unidades vendidas. La lista vive aquí: marcar o desmarcar otra unidad es una
+   línea. La tarjeta se atenúa y lleva su aviso. */
+(function () {
+  var VENDIDAS = ['102'];
+  function mark() {
+    var cards = document.querySelectorAll('#typology-cards-container > div');
+    Array.prototype.forEach.call(cards, function (card) {
+      var txt = card.textContent || '';
+      // only the units line counts, so an area like 102.08 m² cannot match
+      var unidades = (txt.match(/Dptos?[\s\d·|,]+/) || [''])[0];
+      var sold = VENDIDAS.some(function (u) { return new RegExp('(^|[^0-9])' + u + '([^0-9]|$)').test(unidades); });
+      if (!sold) return;
+      card.style.opacity = '0.62';
+      if (card.querySelector('.aki-sold')) return;
+      if (getComputedStyle(card).position === 'static') card.style.position = 'relative';
+      var b = document.createElement('span');
+      b.className = 'aki-sold';
+      b.style.cssText = 'position:absolute;top:1rem;right:1rem;z-index:10;padding:.3rem .85rem;border-radius:999px;' +
+        'background:#121212;color:#fff;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:500';
+      b.textContent = 'Vendido';
+      card.appendChild(b);
+    });
+  }
+  var t = 0;
+  new MutationObserver(function () { clearTimeout(t); t = setTimeout(mark, 160); }).observe(document.documentElement, { subtree: true, childList: true });
+  window.addEventListener('load', mark);
+  mark();
+})();
+</script>
+
+<style>
+  /* El aviso de la portada: invita a mover la imagen para ver el timelapse.
+     Se apaga al primer scroll y desaparece por completo con movimiento
+     reducido, donde el video no corre. */
+  .aki-hint {
+    position: absolute; left: 50%; bottom: clamp(1.5rem, 5vh, 3rem);
+    transform: translateX(-50%); z-index: 6;
+    display: flex; flex-direction: column; align-items: center; gap: 0.45rem;
+    padding: 0.6rem 1.25rem; border-radius: 999px;
+    background: rgba(18, 18, 18, 0.62); color: #fff;
+    font-size: 13px; letter-spacing: 0.01em; text-align: center;
+    pointer-events: none; transition: opacity 0.5s ease;
+  }
+  .aki-hint svg { animation: aki-hint-bob 1.8s ease-in-out infinite; }
+  @keyframes aki-hint-bob {
+    0%, 100% { transform: translateY(0); opacity: 0.95; }
+    50%      { transform: translateY(5px); opacity: 0.5; }
+  }
+  .aki-hint.is-off { opacity: 0; }
+  .aki-video { margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.9rem; }
+  .aki-video figure { margin: 0; }
+  .aki-video video { width: 100%; display: block; border-radius: 12px; background: #000; }
+  .aki-video figcaption { margin-top: 0.4rem; font-size: 12px; color: #595c5d; }
+  @media (prefers-reduced-motion: reduce) { .aki-hint { display: none; } }
+</style>
+<script>
+(function () {
+  /* Los recorridos de las unidades. Se inyectan en la tarjeta que declara esa
+     unidad, con controles y sonido: son visitas narradas, no ambientales. */
+  var VIDEOS = {
+    '303': [{ src: 'assets/depa-303.mp4', poster: 'assets/depa-303-poster.webp', cap: 'Recorrido del Dpto 303' }],
+    '202': [
+      { src: 'assets/depa-202-a.mp4', poster: 'assets/depa-202-a-poster.webp', cap: 'Recorrido de los Dptos 202 · 302 · 502' },
+      { src: 'assets/depa-202-b.mp4', poster: 'assets/depa-202-b-poster.webp', cap: 'Recorrido de los Dptos 202 · 302 · 502, segunda parte' }
+    ]
+  };
+
+  function addVideos() {
+    var cards = document.querySelectorAll('#typology-cards-container > div');
+    Array.prototype.forEach.call(cards, function (card) {
+      var unidades = ((card.textContent || '').match(/Dptos?[\s\d·|,]+/) || [''])[0];
+      Object.keys(VIDEOS).forEach(function (u) {
+        if (!new RegExp('(^|[^0-9])' + u + '([^0-9]|$)').test(unidades)) return;
+        if (card.querySelector('.aki-video')) return;
+        var box = document.createElement('div');
+        box.className = 'aki-video';
+        VIDEOS[u].forEach(function (v) {
+          var fig = document.createElement('figure');
+          fig.innerHTML = '<video controls preload="metadata" playsinline poster="' + v.poster + '" src="' + v.src + '"></video>' +
+                          '<figcaption>' + v.cap + '</figcaption>';
+          box.appendChild(fig);
+        });
+        card.insertBefore(box, card.firstChild);
+      });
+    });
+  }
+
+  /* El aviso de la portada: la gente cree que la imagen está quieta. */
+  function addHint() {
+    var stage = document.querySelector('[data-sc-stage]');
+    if (!stage || document.querySelector('.aki-hint')) return;
+    var h = document.createElement('div');
+    h.className = 'aki-hint';
+    h.setAttribute('role', 'note');
+    h.innerHTML = '<span>Desliza y mira cómo cae la noche sobre el edificio</span>' +
+      '<svg width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true">' +
+      '<path d="M8 1v16M2 12l6 6 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    stage.appendChild(h);
+    var off = function () { if ((window.scrollY || 0) > 40) h.classList.add('is-off'); };
+    window.addEventListener('scroll', off, { passive: true });
+    window.addEventListener('wheel', off, { passive: true });
+    window.addEventListener('touchmove', off, { passive: true });
+  }
+
+  function run() { addVideos(); addHint(); }
+  var t = 0;
+  new MutationObserver(function () { clearTimeout(t); t = setTimeout(run, 180); }).observe(document.documentElement, { subtree: true, childList: true });
+  window.addEventListener('load', run);
+  run();
 })();
 </script>
 </body></html>
