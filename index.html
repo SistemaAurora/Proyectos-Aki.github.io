@@ -2393,4 +2393,175 @@
   run();
 })();
 </script>
+
+<style>
+  /* El aviso de la portada, rediseñado: tipografía grande al centro, con una
+     luz suave detrás para que se lea sobre el video. */
+  .aki-hint {
+    position: absolute; inset: 0; z-index: 6;
+    display: grid; place-items: center; text-align: center;
+    pointer-events: none; padding: 0 6vw; transition: opacity 0.6s ease;
+  }
+  .aki-hint::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(58% 42% at 50% 52%,
+      rgba(10, 10, 10, 0.55) 0%, rgba(10, 10, 10, 0.22) 48%, transparent 76%);
+  }
+  .aki-hint > div { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.9rem; }
+  .aki-hint__big {
+    margin: 0; color: #fff;
+    font-family: var(--sc-font-display, "Space Grotesk", system-ui, sans-serif);
+    font-weight: 500; line-height: 1.04; letter-spacing: -0.03em;
+    font-size: clamp(1.9rem, 4.8vw, 3.8rem);
+    text-wrap: balance; text-shadow: 0 2px 30px rgba(0, 0, 0, 0.45);
+  }
+  .aki-hint__sub { margin: 0; color: rgba(255, 255, 255, 0.85); font-size: clamp(0.95rem, 1.5vw, 1.2rem); }
+  .aki-hint__arrow {
+    width: 1px; height: clamp(26px, 4.5vh, 48px);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+    animation: aki-hint-drop 2s ease-in-out infinite;
+  }
+  @keyframes aki-hint-drop {
+    0% { transform: translateY(-8px); opacity: 0; }
+    40% { opacity: 1; }
+    100% { transform: translateY(12px); opacity: 0; }
+  }
+  /* los videos ya no van dentro de la tarjeta: se abren desde el botón */
+  .aki-video { display: none !important; }
+  .aki-vlb {
+    position: fixed; inset: 0; z-index: 999; background: rgba(10, 10, 10, 0.9);
+    display: none; align-items: center; justify-content: center;
+    padding: clamp(1rem, 4vw, 3rem);
+  }
+  .aki-vlb.is-open { display: flex; }
+  .aki-vlb__box {
+    position: relative; width: min(64rem, 100%); max-height: 100%; overflow-y: auto;
+    background: #121212; border-radius: 18px; padding: clamp(1rem, 3vw, 2rem);
+  }
+  .aki-vlb__close {
+    position: absolute; top: 0.9rem; right: 0.9rem; width: 2.4rem; height: 2.4rem;
+    border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.35);
+    background: transparent; color: #fff; cursor: pointer; font-size: 0.9rem;
+  }
+  .aki-vlb__title {
+    margin: 0 0 1rem; color: #fff;
+    font-family: var(--sc-font-display, "Space Grotesk", system-ui, sans-serif);
+    font-size: clamp(1.1rem, 2vw, 1.5rem); letter-spacing: -0.01em;
+  }
+  .aki-vlb__videos { display: flex; flex-direction: column; gap: 1.25rem; }
+  .aki-vlb__videos video { width: 100%; display: block; border-radius: 12px; background: #000; }
+  @media (prefers-reduced-motion: reduce) { .aki-hint { display: none; } }
+</style>
+<script>
+(function () {
+  var RECORRIDOS = {
+    '303': { titulo: 'Dpto 303', videos: [{ src: 'assets/depa-303.mp4', poster: 'assets/depa-303-poster.webp' }] },
+    '202': { titulo: 'Dptos 202 · 302 · 502', videos: [
+      { src: 'assets/depa-202-a.mp4', poster: 'assets/depa-202-a-poster.webp' },
+      { src: 'assets/depa-202-b.mp4', poster: 'assets/depa-202-b-poster.webp' }
+    ] }
+  };
+
+  function closeRecorrido() {
+    var lb = document.getElementById('aki-video-lb');
+    if (!lb) return;
+    lb.classList.remove('is-open');
+    Array.prototype.forEach.call(lb.querySelectorAll('video'), function (v) { v.pause(); });
+    document.documentElement.style.overflow = '';
+    setTimeout(function () { var b = lb.querySelector('.aki-vlb__videos'); if (b) b.innerHTML = ''; }, 320);
+  }
+
+  function openRecorrido(key) {
+    var data = RECORRIDOS[key];
+    if (!data) return;
+    var lb = document.getElementById('aki-video-lb');
+    if (!lb) {
+      lb = document.createElement('div');
+      lb.id = 'aki-video-lb';
+      lb.className = 'aki-vlb';
+      lb.innerHTML = '<div class="aki-vlb__box"><button class="aki-vlb__close" aria-label="Cerrar">✕</button>' +
+                     '<p class="aki-vlb__title"></p><div class="aki-vlb__videos"></div></div>';
+      lb.addEventListener('click', function (e) {
+        if (e.target === lb || (e.target.className || '').indexOf('aki-vlb__close') !== -1) closeRecorrido();
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeRecorrido(); });
+      document.body.appendChild(lb);
+    }
+    lb.querySelector('.aki-vlb__title').textContent = 'Recorrido virtual · ' + data.titulo;
+    var box = lb.querySelector('.aki-vlb__videos');
+    box.innerHTML = '';
+    data.videos.forEach(function (v, i) {
+      var vid = document.createElement('video');
+      vid.setAttribute('src', v.src);
+      vid.setAttribute('poster', v.poster);
+      vid.setAttribute('controls', '');
+      vid.setAttribute('playsinline', '');
+      vid.preload = 'metadata';
+      if (i === 0) vid.autoplay = true;
+      box.appendChild(vid);
+    });
+    lb.classList.add('is-open');
+    document.documentElement.style.overflow = 'hidden';
+    var first = box.querySelector('video');
+    if (first) {
+      var pr = first.play();
+      if (pr && pr.catch) pr.catch(function () { first.muted = true; var p2 = first.play(); if (p2 && p2.catch) p2.catch(function () {}); });
+    }
+  }
+
+  function addButtons() {
+    var cards = document.querySelectorAll('#typology-cards-container > div');
+    Array.prototype.forEach.call(cards, function (card) {
+      var unidades = ((card.textContent || '').match(/Dptos?[\s\d·|,]+/) || [''])[0];
+      var key = Object.keys(RECORRIDOS).filter(function (u) {
+        return new RegExp('(^|[^0-9])' + u + '([^0-9]|$)').test(unidades);
+      })[0];
+      if (!key || card.querySelector('.aki-vbtn')) return;
+      var primerBoton = card.querySelector('button');
+      var zona = primerBoton ? primerBoton.parentElement : null;
+      if (!zona || !zona.parentElement) return;
+      var row = document.createElement('div');
+      row.className = 'pt-2';
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'aki-vbtn w-full bg-secondary text-white py-2.5 rounded-full text-xs font-label-technical tracking-wider uppercase hover:opacity-90 transition-opacity flex items-center justify-center gap-1';
+      btn.innerHTML = '<span>Ver recorrido virtual</span><span class="material-symbols-outlined text-xs">play_circle</span>';
+      // el clic va por delegación más abajo: así sobrevive a cualquier
+      // redibujado de la tarjeta que se lleve los listeners
+      row.appendChild(btn);
+      zona.parentElement.insertBefore(row, zona);
+    });
+  }
+
+  function restyleHint() {
+    var h = document.querySelector('.aki-hint');
+    if (!h || h.dataset.aki) return;
+    h.dataset.aki = '1';
+    h.innerHTML = '<div>' +
+      '<p class="aki-hint__big">Desliza y mira el cielo cambiar</p>' +
+      '<p class="aki-hint__sub">El edificio, del atardecer a la noche</p>' +
+      '<span class="aki-hint__arrow"></span></div>';
+  }
+
+  /* Delegación: el botón puede ser recreado por el redibujado de las tarjetas,
+     así que el clic se escucha en el documento y se resuelve por la unidad. */
+  document.addEventListener('click', function (e) {
+    var btn = e.target && e.target.closest ? e.target.closest('.aki-vbtn') : null;
+    if (!btn) return;
+    e.preventDefault();
+    var card = btn.closest('#typology-cards-container > div');
+    var unidades = card ? ((card.textContent || '').match(/Dptos?[\s\d·|,]+/) || [''])[0] : '';
+    var key = Object.keys(RECORRIDOS).filter(function (u) {
+      return new RegExp('(^|[^0-9])' + u + '([^0-9]|$)').test(unidades);
+    })[0];
+    if (key) openRecorrido(key);
+  }, true);
+
+  function run() { addButtons(); restyleHint(); }
+  var t = 0;
+  new MutationObserver(function () { clearTimeout(t); t = setTimeout(run, 180); }).observe(document.documentElement, { subtree: true, childList: true });
+  window.addEventListener('load', run);
+  run();
+})();
+</script>
 </body></html>
