@@ -2195,7 +2195,9 @@
   }
   document.addEventListener('click', function (e) {
     var el = e.target;
-    var b = el && el.closest ? el.closest('#typology-cards-container button, #typology-cards-container img, [onclick*="openModalForTypology"]') : null;
+    // .aki-vbtn (el botón de recorrido virtual) queda fuera: su clic abre el
+    // lightbox de video y, si este handler también lo toma, se abren los dos.
+    var b = el && el.closest ? el.closest('#typology-cards-container button:not(.aki-vbtn), #typology-cards-container img, [onclick*="openModalForTypology"]') : null;
     if (!b) return;
     // the buttons' own onclick opens the original modal, whose price spans the
     // cleanup removes: it throws. Ours always wins, for every type.
@@ -2530,11 +2532,15 @@
   }
 
   /* Delegación: el botón puede ser recreado por el redibujado de las tarjetas,
-     así que el clic se escucha en el documento y se resuelve por la unidad. */
+     así que el clic se escucha en el documento y se resuelve por la unidad.
+     El handler de la ficha técnica (también en captura sobre document) excluye
+     .aki-vbtn en su selector; el stopPropagation de aquí evita que el clic
+     siga bajando al botón y a otros listeners. */
   document.addEventListener('click', function (e) {
     var btn = e.target && e.target.closest ? e.target.closest('.aki-vbtn') : null;
     if (!btn) return;
     e.preventDefault();
+    e.stopPropagation();
     var card = btn.closest('#typology-cards-container > div');
     var unidades = card ? ((card.textContent || '').match(/Dptos?[\s\d·|,]+/) || [''])[0] : '';
     var key = Object.keys(RECORRIDOS).filter(function (u) {
