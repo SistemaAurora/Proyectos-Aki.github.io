@@ -2285,7 +2285,7 @@
 /* Unidades vendidas. La lista vive aquí: marcar o desmarcar otra unidad es una
    línea. La tarjeta se atenúa y lleva su aviso. */
 (function () {
-  var VENDIDAS = ['102'];
+  var VENDIDAS = [];   // el sistema de vendidos del sitio vive en SOLD_UNITS
   function mark() {
     var cards = document.querySelectorAll('#typology-cards-container > div');
     Array.prototype.forEach.call(cards, function (card) {
@@ -2294,7 +2294,7 @@
       var unidades = (txt.match(/Dptos?[\s\d·|,]+/) || [''])[0];
       var sold = VENDIDAS.some(function (u) { return new RegExp('(^|[^0-9])' + u + '([^0-9]|$)').test(unidades); });
       if (!sold) return;
-      card.style.opacity = '0.62';
+      // la tarjeta no se atenúa: se ve igual que las demás, solo con su aviso
       if (card.querySelector('.aki-sold')) return;
       if (getComputedStyle(card).position === 'static') card.style.position = 'relative';
       var b = document.createElement('span');
@@ -2395,26 +2395,33 @@
 </script>
 
 <style>
-  /* El aviso de la portada, rediseñado: tipografía grande al centro, con una
-     luz suave detrás para que se lea sobre el video. */
+  /* El aviso de la portada, rediseñado: solo las palabras en blanco con su
+     flecha. La pasada vieja del ensamblador dejaba un fondo radial detrás, así
+     que se anula explícitamente. */
+  .aki-hint::before { content: none !important; background: none !important; display: none !important; }
+  /* la regla vieja del aviso traía una pastilla oscura; con la caja a pantalla
+     completa ese fondo se veía como un óvalo negro gigante. Se anula. */
+  .aki-hint { background: none !important; border-radius: 0 !important; box-shadow: none !important; }
   .aki-hint {
     position: absolute; inset: 0; z-index: 6;
     display: grid; place-items: center; text-align: center;
+    transform: none;                 /* la regla vieja dejaba translateX(-50%) y corría la caja */
+    left: 0; bottom: 0; width: auto; height: auto;
     pointer-events: none; padding: 0 6vw; transition: opacity 0.6s ease;
   }
-  .aki-hint > div { position: relative; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+  .aki-hint > div { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
   .aki-hint__big {
-    margin: 0; color: #c9a86a;
-    font-family: var(--sc-font-display, "Space Grotesk", system-ui, sans-serif);
-    font-weight: 500; line-height: 1.04; letter-spacing: -0.02em;
-    font-size: clamp(1.9rem, 4.8vw, 3.8rem);
-    text-wrap: balance;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 2px 28px rgba(0, 0, 0, 0.45);
+    margin: 0; color: #fff;
+    font-family: var(--sc-font-text, "Plus Jakarta Sans", system-ui, sans-serif);
+    font-weight: 500;
+    font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+    letter-spacing: 0.16em; text-transform: uppercase;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55), 0 1px 2px rgba(0, 0, 0, 0.5);
   }
   .aki-hint__arrow {
-    width: 1px; height: clamp(26px, 4.5vh, 48px);
-    background: linear-gradient(to bottom, rgba(201, 168, 106, 0.9), rgba(201, 168, 106, 0));
-    animation: aki-hint-drop 2s ease-in-out infinite;
+    width: 16px; height: 20px; color: #fff;
+    filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.55));
+    animation: aki-hint-drop 1.9s ease-in-out infinite;
   }
   @keyframes aki-hint-drop {
     0% { transform: translateY(-8px); opacity: 0; }
@@ -2551,8 +2558,10 @@
     if (!h || h.dataset.aki) return;
     h.dataset.aki = '1';
     h.innerHTML = '<div>' +
-      '<p class="aki-hint__big">Desliza y mira el cielo cambiar</p>' +
-      '<span class="aki-hint__arrow"></span></div>';
+      '<p class="aki-hint__big">Desliza</p>' +
+      '<svg class="aki-hint__arrow" viewBox="0 0 16 20" fill="none" aria-hidden="true">' +
+      '<path d="M8 1v16M2 11l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '</div>';
   }
 
   /* Delegación: el botón puede ser recreado por el redibujado de las tarjetas,
