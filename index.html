@@ -2331,44 +2331,10 @@
     50%      { transform: translateY(5px); opacity: 0.5; }
   }
   .aki-hint.is-off { opacity: 0; }
-  .aki-video { margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.9rem; }
-  .aki-video figure { margin: 0; }
-  .aki-video video { width: 100%; display: block; border-radius: 12px; background: #000; }
-  .aki-video figcaption { margin-top: 0.4rem; font-size: 12px; color: #595c5d; }
   @media (prefers-reduced-motion: reduce) { .aki-hint { display: none; } }
 </style>
 <script>
 (function () {
-  /* Los recorridos de las unidades. Se inyectan en la tarjeta que declara esa
-     unidad, con controles y sonido: son visitas narradas, no ambientales. */
-  var VIDEOS = {
-    '303': [{ src: 'assets/depa-303.mp4', poster: 'assets/depa-303-poster.webp', cap: 'Recorrido del Dpto 303' }],
-    '202': [
-      { src: 'assets/depa-202-a.mp4', poster: 'assets/depa-202-a-poster.webp', cap: 'Recorrido de los Dptos 202 · 302 · 502' },
-      { src: 'assets/depa-202-b.mp4', poster: 'assets/depa-202-b-poster.webp', cap: 'Recorrido de los Dptos 202 · 302 · 502, segunda parte' }
-    ]
-  };
-
-  function addVideos() {
-    var cards = document.querySelectorAll('#typology-cards-container > div');
-    Array.prototype.forEach.call(cards, function (card) {
-      var unidades = ((card.textContent || '').match(/Dptos?[\s\d·|,]+/) || [''])[0];
-      Object.keys(VIDEOS).forEach(function (u) {
-        if (!new RegExp('(^|[^0-9])' + u + '([^0-9]|$)').test(unidades)) return;
-        if (card.querySelector('.aki-video')) return;
-        var box = document.createElement('div');
-        box.className = 'aki-video';
-        VIDEOS[u].forEach(function (v) {
-          var fig = document.createElement('figure');
-          fig.innerHTML = '<video controls preload="metadata" playsinline poster="' + v.poster + '" src="' + v.src + '"></video>' +
-                          '<figcaption>' + v.cap + '</figcaption>';
-          box.appendChild(fig);
-        });
-        card.insertBefore(box, card.firstChild);
-      });
-    });
-  }
-
   /* El aviso de la portada: la gente cree que la imagen está quieta. */
   function addHint() {
     var stage = document.querySelector('[data-sc-stage]');
@@ -2386,7 +2352,7 @@
     window.addEventListener('touchmove', off, { passive: true });
   }
 
-  function run() { addVideos(); addHint(); }
+  function run() { addHint(); }
   var t = 0;
   new MutationObserver(function () { clearTimeout(t); t = setTimeout(run, 180); }).observe(document.documentElement, { subtree: true, childList: true });
   window.addEventListener('load', run);
@@ -2428,8 +2394,7 @@
     40% { opacity: 1; }
     100% { transform: translateY(12px); opacity: 0; }
   }
-  /* los videos ya no van dentro de la tarjeta: se abren desde el botón */
-  .aki-video { display: none !important; }
+  /* los recorridos ya no viven dentro de la tarjeta: se abren desde el botón */
   .aki-vlb {
     position: fixed; inset: 0; z-index: 999; background: rgba(10, 10, 10, 0.9);
     display: none; align-items: center; justify-content: center;
